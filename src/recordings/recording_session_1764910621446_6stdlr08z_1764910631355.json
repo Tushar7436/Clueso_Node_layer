@@ -1,0 +1,140 @@
+{
+  "sessionId": "session_1764910621446_6stdlr08z",
+  "startTime": 1764910589333,
+  "endTime": 1764910621446,
+  "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+  "viewport": {
+    "width": 1536,
+    "height": 695
+  },
+  "events": [
+    {
+      "timestamp": 11574,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 12404,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 16689,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 18253,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [],
+        "text": "Dashboard",
+        "selector": "div#elm-root > div:nth-of-type(1) > div > div > nav > div > div > ul > li:nth-of-type(1) > a > div > span:nth-of-type(2)",
+        "bbox": {
+          "x": 40,
+          "y": 80,
+          "width": 83,
+          "height": 24
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 20350,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [],
+        "text": "API Keys",
+        "selector": "div#elm-root > div:nth-of-type(1) > div > div > nav > div > div > ul > li:nth-of-type(2) > a > div > span:nth-of-type(2)",
+        "bbox": {
+          "x": 40,
+          "y": 120,
+          "width": 67,
+          "height": 24
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 21515,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 23680,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://console.deepgram.com/project/4707af85-2d54-43a9-be3e-bc681d7ca135/keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "videoPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\uploads\\video_1764910594764.webm",
+  "audioPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\uploads\\audio_1764910595231.webm",
+  "processedAt": "2025-12-05T04:57:11.355Z"
+}

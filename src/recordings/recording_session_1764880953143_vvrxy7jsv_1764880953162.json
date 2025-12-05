@@ -1,0 +1,972 @@
+{
+  "sessionId": "session_1764880953143_vvrxy7jsv",
+  "startTime": 1764880934009,
+  "endTime": 1764880953143,
+  "url": "https://elevenlabs.io/app/default-voices?search=good",
+  "viewport": {
+    "width": 1536,
+    "height": 695
+  },
+  "events": [
+    {
+      "timestamp": 6087,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 675.2000122070312
+        }
+      }
+    },
+    {
+      "timestamp": 6565,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 7169,
+      "type": "focus",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 7196,
+      "type": "blur",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 7391,
+      "type": "click",
+      "target": {
+        "tag": "P",
+        "id": null,
+        "classes": [
+          "text-sm",
+          "text-foreground",
+          "font-semibold",
+          "max-w-sm",
+          "inline-flex",
+          "flex-row",
+          "flex-nowrap",
+          "items-center",
+          "w-full"
+        ],
+        "text": "Roger",
+        "selector": "p.text-sm.text-foreground.font-semibold.max-w-sm.inline-flex.flex-row.flex-nowrap.items-center.w-full",
+        "bbox": {
+          "x": 320,
+          "y": 191,
+          "width": 344,
+          "height": 20
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 9532,
+      "type": "click",
+      "target": {
+        "tag": "P",
+        "id": null,
+        "classes": [
+          "text-sm",
+          "text-subtle",
+          "font-normal",
+          "line-clamp-1",
+          "max-w-xl",
+          "2xl:max-w-2xl",
+          "3xl:max-w-3xl"
+        ],
+        "text": "Young adult woman with a confident and warm, mature quality and a reassuring, professional tone.",
+        "selector": "p.text-sm.text-subtle.font-normal.line-clamp-1.max-w-xl.2xl:max-w-2xl.3xl:max-w-3xl",
+        "bbox": {
+          "x": 320,
+          "y": 269,
+          "width": 344,
+          "height": 20
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 10565,
+      "type": "focus",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 10787,
+      "type": "click",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        }
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 11678,
+      "type": "click",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        }
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 11833,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "value": "g",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 12125,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "value": "go",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 12277,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "value": "goo",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 12979,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "value": "good",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices?search=goo",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 13436,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 857,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "value": "good",
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices?search=good",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 16469,
+      "type": "blur",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 873,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices?search=good",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 18097,
+      "type": "focus",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 873,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices?search=good",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 18201,
+      "type": "blur",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "flex",
+          "border-gray-alpha-200",
+          "bg-transparent",
+          "shadow-none",
+          "transition-colors",
+          "file:border-0",
+          "file:bg-transparent",
+          "file:font-medium",
+          "placeholder:text-subtle",
+          "focus-ring",
+          "focus-visible:border-foreground",
+          "hover:border-gray-alpha-300",
+          "disabled:cursor-not-allowed",
+          "disabled:opacity-50",
+          "[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))]",
+          "[&:-webkit-autofill]:border-gray-200",
+          "[&:-webkit-autofill]:focus:border-foreground",
+          "[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))]",
+          "[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))]",
+          "[&_input:-moz-autofill]:border-gray-200",
+          "[&_input:-moz-autofill]:focus:border-foreground",
+          "file:text-sm",
+          "text-base",
+          "sm:text-sm",
+          "w-full",
+          "h-10",
+          "rounded-xl",
+          "border-0",
+          "border-none",
+          "px-3",
+          "py-0",
+          "ring-0",
+          "focus-visible:border-none",
+          "focus-visible:ring-0",
+          "focus-visible:ring-offset-0"
+        ],
+        "text": null,
+        "selector": "input.flex.border-gray-alpha-200.bg-transparent.shadow-none.transition-colors.file:border-0.file:bg-transparent.file:font-medium.placeholder:text-subtle.focus-ring.focus-visible:border-foreground.hover:border-gray-alpha-300.disabled:cursor-not-allowed.disabled:opacity-50.[&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&:-webkit-autofill]:[-webkit-text-fill-color:hsl(var(--foreground))].[&:-webkit-autofill]:border-gray-200.[&:-webkit-autofill]:focus:border-foreground.[&_input:-moz-autofill]:shadow-[inset_0_0_0px_1000px_hsl(var(--background))].[&_input:-moz-autofill]:text-fill-color-[hsl(var(--foreground))].[&_input:-moz-autofill]:border-gray-200.[&_input:-moz-autofill]:focus:border-foreground.file:text-sm.text-base.sm:text-sm.w-full.h-10.rounded-xl.border-0.border-none.px-3.py-0.ring-0.focus-visible:border-none.focus-visible:ring-0.focus-visible:ring-offset-0",
+        "bbox": {
+          "x": 309,
+          "y": 80,
+          "width": 873,
+          "height": 40
+        },
+        "attributes": {
+          "data-testid": "voices-search-input"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://elevenlabs.io/app/default-voices?search=good",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    }
+  ],
+  "videoPath": null,
+  "audioPath": null,
+  "processedAt": "2025-12-04T20:42:33.162Z"
+}

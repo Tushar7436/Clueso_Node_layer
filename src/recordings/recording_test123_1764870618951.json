@@ -1,0 +1,16 @@
+{
+  "sessionId": "test123",
+  "events": [
+    {
+      "timestamp": 0,
+      "type": "click",
+      "target": {
+        "tag": "BUTTON",
+        "selector": "#test"
+      }
+    }
+  ],
+  "videoPath": null,
+  "audioPath": null,
+  "processedAt": "2025-12-04T17:50:18.951Z"
+}

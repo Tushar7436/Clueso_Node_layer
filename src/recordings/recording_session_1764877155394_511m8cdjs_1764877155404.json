@@ -1,0 +1,754 @@
+{
+  "sessionId": "session_1764877155394_511m8cdjs",
+  "startTime": 1764877119256,
+  "endTime": 1764877155394,
+  "url": "https://www.npmjs.com/search?q=rtyuio",
+  "viewport": {
+    "width": 1536,
+    "height": 695
+  },
+  "events": [
+    {
+      "timestamp": 9834,
+      "type": "focus",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 9913,
+      "type": "click",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        }
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 10841,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 133.60000610351562
+        }
+      }
+    },
+    {
+      "timestamp": 11431,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 533.5999755859375
+        }
+      }
+    },
+    {
+      "timestamp": 12291,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 800
+        }
+      }
+    },
+    {
+      "timestamp": 12929,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 1066.4000244140625
+        }
+      }
+    },
+    {
+      "timestamp": 13949,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 1600
+        }
+      }
+    },
+    {
+      "timestamp": 14898,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 1866.4000244140625
+        }
+      }
+    },
+    {
+      "timestamp": 16191,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 4590.39990234375
+        }
+      }
+    },
+    {
+      "timestamp": 17475,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 18699,
+      "type": "blur",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 18802,
+      "type": "click",
+      "target": {
+        "tag": "DIV",
+        "id": "search",
+        "classes": [
+          "_581ebd89",
+          "relative",
+          "flex-auto",
+          "w-100",
+          "w-50-ns",
+          "pv2-ns",
+          "order-1-ns",
+          "order-2"
+        ],
+        "text": "Search",
+        "selector": "#search",
+        "bbox": {
+          "x": 134,
+          "y": 148,
+          "width": 1125,
+          "height": 68
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 19454,
+      "type": "focus",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 19569,
+      "type": "click",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        }
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 20793,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "r",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 20867,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "rt",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 20919,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "rty",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 20971,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "rtyu",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 21023,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "rtyui",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 21141,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "rtyuio",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 25278,
+      "type": "type",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "value": "rtyuio",
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 25278,
+      "type": "blur",
+      "target": {
+        "tag": "INPUT",
+        "id": null,
+        "classes": [
+          "_390acbc5",
+          "f5",
+          "fw3",
+          "black",
+          "relative"
+        ],
+        "text": null,
+        "selector": "input.f5.fw3.black.relative",
+        "bbox": {
+          "x": 178,
+          "y": 162,
+          "width": 957,
+          "height": 40
+        },
+        "attributes": {
+          "aria-label": "Search packages",
+          "name": "q",
+          "type": "search",
+          "role": "combobox"
+        },
+        "type": "search",
+        "name": "q"
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 25385,
+      "type": "click",
+      "target": {
+        "tag": "A",
+        "id": "signup",
+        "classes": [
+          "_9752c8b3",
+          "pa2",
+          "lh-copy",
+          "br2",
+          "f6",
+          "no-underline",
+          "fw5",
+          "black",
+          "dim",
+          "ph3",
+          "mr3"
+        ],
+        "text": "Sign Up",
+        "selector": "#signup",
+        "bbox": {
+          "x": 1291,
+          "y": 156,
+          "width": 111,
+          "height": 49
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 29137,
+      "type": "click",
+      "target": {
+        "tag": "BUTTON",
+        "id": null,
+        "classes": [
+          "_0da775bb",
+          "bn",
+          "pv2",
+          "ph4",
+          "f6",
+          "white",
+          "pointer"
+        ],
+        "text": "Search",
+        "selector": "button.bn.pv2.ph4.f6.white.pointer",
+        "bbox": {
+          "x": 1143,
+          "y": 156,
+          "width": 116,
+          "height": 52
+        },
+        "attributes": {
+          "aria-label": "Search",
+          "type": "submit"
+        }
+      },
+      "metadata": {
+        "url": "https://www.npmjs.com/package/node-cache",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 31113,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://www.npmjs.com/search?q=rtyuio",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "videoPath": null,
+  "audioPath": null,
+  "processedAt": "2025-12-04T19:39:15.404Z"
+}
