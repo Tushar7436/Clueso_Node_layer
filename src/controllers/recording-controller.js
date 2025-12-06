@@ -7,68 +7,75 @@ const { Logger } = require("../config");
 exports.uploadVideoChunk = async (req, res) => {
   try {
     const chunk = req.body; // <-- this is a Buffer now
-    await recordingService.saveChunk({ type: "video", chunk });
+
+    Logger.info(`[CONTROLLER] Video chunk received - Request ID: ${req.requestId}`);
+    Logger.info(`[CONTROLLER] Chunk is Buffer: ${Buffer.isBuffer(chunk)}`);
+    Logger.info(`[CONTROLLER] Chunk size: ${chunk ? chunk.length : 0} bytes`);
+    Logger.info(`[CONTROLLER] Chunk type: ${typeof chunk}`);
+
+    await recordingService.saveChunk({ type: "video", chunk, requestId: req.requestId });
+
+    Logger.info(`[CONTROLLER] Video chunk saved successfully - Request ID: ${req.requestId}`);
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Video chunk error:", err);
+    Logger.error(`[CONTROLLER] Video chunk error - Request ID: ${req.requestId}:`, err);
     res.status(500).json({ error: "Failed to save video chunk" });
   }
 };
 
 exports.uploadAudioChunk = async (req, res) => {
   try {
-    const chunk = req.body; // raw binary
-    await recordingService.saveChunk({
-      type: "audio",
-      chunk
-    });
+    const chunk = req.body;
+
+    Logger.info(`[CONTROLLER] Audio chunk received - Request ID: ${req.requestId}`);
+    Logger.info(`[CONTROLLER] Chunk is Buffer: ${Buffer.isBuffer(chunk)}`);
+    Logger.info(`[CONTROLLER] Chunk size: ${chunk ? chunk.length : 0} bytes`);
+    Logger.info(`[CONTROLLER] Chunk type: ${typeof chunk}`);
+
+    await recordingService.saveChunk({ type: "audio", chunk, requestId: req.requestId });
+
+    Logger.info(`[CONTROLLER] Audio chunk saved successfully - Request ID: ${req.requestId}`);
     return res.status(200).json({ success: true });
   } catch (err) {
-    console.error("Audio chunk error:", err);
+    Logger.error(`[CONTROLLER] Audio chunk error - Request ID: ${req.requestId}:`, err);
     res.status(500).json({ error: "Failed to save audio chunk" });
   }
 };
 
 exports.processRecording = async (req, res) => {
   try {
-    // Parse events and metadata from form data
     const events = req.body.events ? JSON.parse(req.body.events) : [];
     const metadata = req.body.metadata ? JSON.parse(req.body.metadata) : {};
-    
-    // Get file paths if video/audio files were uploaded
+
     const videoPath = req.files?.video?.[0]?.path;
     let audioPath = req.files?.audio?.[0]?.path;
-    
-    // If no audio path from upload, check if there's a stream file
+
     if (!audioPath) {
       audioPath = recordingService.getStreamFilePath("audio");
     }
-    
+
     let transcribedText = null;
     let pythonResponse = null;
-    
-    // If audio file is available, process it with Deepgram
+
+    // Deepgram transcription
     if (audioPath && fs.existsSync(audioPath)) {
       try {
         Logger.info(`[Recording Controller] Processing audio file: ${audioPath}`);
-        
-        // Step 1: Transcribe audio using Deepgram
+
         const transcription = await DeepgramService.transcribeAudio(audioPath, {
-          model: 'nova-2',
-          language: 'en-US',
-          punctuate: true
+          model: "nova-2",
+          language: "en-US",
+          punctuate: true,
         });
-        
+
         transcribedText = transcription.text;
-        
-        // Log the transcribed text
+
         Logger.info(`[Recording Controller] Transcribed text from Deepgram:`);
         Logger.info(`[Recording Controller] Text: "${transcribedText}"`);
         Logger.info(`[Recording Controller] Confidence: ${transcription.confidence}`);
-        Logger.info(`[Recording Controller] Metadata:`, transcription.metadata);
-        
-        // Step 2: Send transcribed text with DOM events to Python layer
-        if (transcribedText && transcribedText.trim().length > 0) {
+        Logger.info(`[Recording Controller] Metadata: ${JSON.stringify(transcription.metadata)}`);
+
+        if (transcribedText.trim().length > 0) {
           try {
             Logger.info(`[Recording Controller] Sending transcribed text to Python layer`);
             pythonResponse = await PythonService.sendTextWithDomEvents(
@@ -78,57 +85,43 @@ exports.processRecording = async (req, res) => {
             );
             Logger.info(`[Recording Controller] Successfully sent data to Python layer`);
           } catch (pythonError) {
-            Logger.error(`[Recording Controller] Error sending to Python layer:`, pythonError);
-            // Don't fail the entire request if Python layer fails
-            // Continue with recording processing
+            Logger.error(`[Recording Controller] Error sending to Python layer: ${pythonError}`);
           }
         } else {
           Logger.warn(`[Recording Controller] Transcribed text is empty, skipping Python layer`);
         }
       } catch (deepgramError) {
-        Logger.error(`[Recording Controller] Error processing audio with Deepgram:`, deepgramError);
-        // Don't fail the entire request if Deepgram fails
-        // Continue with recording processing
+        Logger.error(`[Recording Controller] Error processing audio with Deepgram: ${deepgramError}`);
       }
     } else {
       Logger.warn(`[Recording Controller] No audio file found, skipping Deepgram transcription`);
     }
-    
-    // Process recording through service (finalizes streams and saves recording)
+
+    // Finalize video/audio & save JSON
     const result = await recordingService.processRecording({
       events,
       metadata,
       videoPath,
-      audioPath
+      audioPath,
     });
-    
-    // Add transcription info to result
+
     if (transcribedText) {
       result.transcription = {
         text: transcribedText,
-        sentToPython: pythonResponse !== null
+        sentToPython: pythonResponse !== null,
       };
     }
-    
-    // Clean up uploaded files
-    const finalVideoPath = result.videoPath || videoPath;
-    if (finalVideoPath && fs.existsSync(finalVideoPath)) {
-      fs.unlink(finalVideoPath, (err) => {
-        if (err) console.error("[controller] Error deleting video file:", err);
-      });
-    }
-    if (audioPath && fs.existsSync(audioPath)) {
-      fs.unlink(audioPath, (err) => {
-        if (err) console.error("[controller] Error deleting audio file:", err);
-      });
-    }
-    
+
+    // Note: Files are now managed by the service layer
+    // They are moved to the recordings directory with proper naming
+    // No need to delete them here
+
     return res.status(200).json(result);
   } catch (err) {
     Logger.error("Process recording error:", err);
-    res.status(500).json({ 
-      error: "Failed to process recording", 
-      message: err.message 
+    res.status(500).json({
+      error: "Failed to process recording",
+      message: err.message,
     });
   }
 };

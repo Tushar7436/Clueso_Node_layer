@@ -1,10 +1,10 @@
 const express = require('express');
 
 const v1Routes = require('./v1');
-const recording = require('./v1/recording-routes')
 const router = express.Router();
 
 router.use('/v1', v1Routes);
-router.use("/recording", recording);
+// Note: recording routes are registered directly in index.js
+// before global body parsers to prevent binary data corruption
 
 module.exports = router;
