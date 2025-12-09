@@ -1,0 +1,241 @@
+{
+  "sessionId": "session_1765255756729_zaj6s0fje",
+  "startTime": 1765255756972,
+  "endTime": 1765255786544,
+  "url": "https://aistudio.google.com/app/projects",
+  "viewport": {
+    "width": 1536,
+    "height": 695
+  },
+  "events": [
+    {
+      "timestamp": 4675,
+      "type": "click",
+      "target": {
+        "tag": "DIV",
+        "id": null,
+        "classes": [
+          "page-content-wrapper"
+        ],
+        "text": "Projectsdocs Understanding projects add Create a new project cloud_download Import projects  search ProjectKeysCreated onQuota tier ProductTextGeneration  gen-lang-client-0151852985  1 key Dec 3, 2025 Set up billing  Upgrade\n Free tier\ncontent_copypaidbar_chartmore_vert neworenaaa  gen-lang-client-0850878521  1 key Nov 19, 2025 Set up billing  Upgrade\n Free tier\ncontent_copypaidbar_chartmore_vert neworena  gen-lang-client-0534460458  3 keys Nov 10, 2025 Set up billing  Upgrade\n Free tier\ncontent_copypaidbar_chartmore_vert Orena  gen-lang-client-0564398372  1 key Oct 23, 2025 Set up billing  Upgrade\n Free tier\ncontent_copypaidbar_chartmore_vert",
+        "selector": "div.page-content-wrapper",
+        "bbox": {
+          "x": 220,
+          "y": 0,
+          "width": 1316,
+          "height": 526
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 9118,
+      "type": "click",
+      "target": {
+        "tag": "A",
+        "id": null,
+        "classes": [
+          "ms-button-borderless",
+          "ng-star-inserted"
+        ],
+        "text": "API keys",
+        "selector": "a.ms-button-borderless.ng-star-inserted",
+        "bbox": {
+          "x": 8,
+          "y": 109,
+          "width": 203,
+          "height": 32
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 10710,
+      "type": "click",
+      "target": {
+        "tag": "A",
+        "id": null,
+        "classes": [
+          "ms-button-borderless",
+          "ng-star-inserted"
+        ],
+        "text": "Usage and Billing",
+        "selector": "a.ms-button-borderless.ng-star-inserted",
+        "bbox": {
+          "x": 8,
+          "y": 181,
+          "width": 203,
+          "height": 32
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/api-keys",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 12372,
+      "type": "click",
+      "target": {
+        "tag": "A",
+        "id": null,
+        "classes": [
+          "ms-button-borderless",
+          "ng-star-inserted"
+        ],
+        "text": "Logs and Datasets",
+        "selector": "a.ms-button-borderless.ng-star-inserted",
+        "bbox": {
+          "x": 8,
+          "y": 217,
+          "width": 203,
+          "height": 32
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?timeRange=last-28-days",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 14750,
+      "type": "click",
+      "target": {
+        "tag": "A",
+        "id": null,
+        "classes": [
+          "ms-button-borderless",
+          "ng-star-inserted"
+        ],
+        "text": "Projects",
+        "selector": "a.ms-button-borderless.ng-star-inserted",
+        "bbox": {
+          "x": 8,
+          "y": 145,
+          "width": 203,
+          "height": 32
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/logs",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 19843,
+      "type": "click",
+      "target": {
+        "tag": "BUTTON",
+        "id": null,
+        "classes": [
+          "project-table-link",
+          "ms-button-link"
+        ],
+        "text": "ProductTextGeneration",
+        "selector": "button.project-table-link.ms-button-link",
+        "bbox": {
+          "x": 307,
+          "y": 220,
+          "width": 152,
+          "height": 24
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 21707,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [
+          "material-symbols-outlined",
+          "notranslate",
+          "ms-button-icon-symbol",
+          "ng-star-inserted"
+        ],
+        "text": "close",
+        "selector": "span.material-symbols-outlined.notranslate.ms-button-icon-symbol.ng-star-inserted",
+        "bbox": {
+          "x": 976,
+          "y": 170,
+          "width": 18,
+          "height": 18
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 22677,
+      "type": "click",
+      "target": {
+        "tag": "BUTTON",
+        "id": null,
+        "classes": [
+          "link",
+          "ms-button-link",
+          "ng-star-inserted"
+        ],
+        "text": "Set up billing",
+        "selector": "button.link.ms-button-link.ng-star-inserted",
+        "bbox": {
+          "x": 1160,
+          "y": 220,
+          "width": 85,
+          "height": 24
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    }
+  ],
+  "videoPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\recordings\\recording_session_1765255756729_zaj6s0fje_video.webm",
+  "audioPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\recordings\\recording_session_1765255756729_zaj6s0fje_audio.webm",
+  "processedAt": "2025-12-09T04:49:47.255Z"
+}

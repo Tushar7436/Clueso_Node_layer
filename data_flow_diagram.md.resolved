@@ -1,0 +1,235 @@
+# Visual Data Flow Diagrams
+
+## Complete System Architecture
+
+```mermaid
+graph TB
+    subgraph Extension["Chrome Extension"]
+        E1[Screen Recorder]
+        E2[Audio Recorder]
+        E3[DOM Event Tracker]
+    end
+    
+    subgraph Node["Node.js Layer (Port 3000)"]
+        N1[Chunk Receiver]
+        N2[File Manager]
+        N3[Deepgram Client]
+        N4[Python Client]
+        N5[WebSocket Server]
+    end
+    
+    subgraph External["External Services"]
+        D[Deepgram API]
+        P[Python Service :8000]
+    end
+    
+    subgraph Frontend["Frontend Platform"]
+        F1[Socket.IO Client]
+        F2[Video Player]
+        F3[Audio Player]
+        F4[Instructions Editor]
+    end
+    
+    E1 -->|Video Chunks| N1
+    E2 -->|Audio Chunks| N1
+    E3 -->|DOM Events| N1
+    N1 --> N2
+    N2 -->|Raw Audio| N3
+    N3 -->|Text| D
+    D -->|Transcription| N3
+    N3 -->|Text + Events| N4
+    N4 -->|Request| P
+    P -->|Processed Audio + Instructions| N4
+    N4 --> N5
+    N2 -->|Video| N5
+    N5 -->|video event| F1
+    N5 -->|audio event| F1
+    N5 -->|instructions event| F1
+    F1 --> F2
+    F1 --> F3
+    F1 --> F4
+```
+
+## Detailed Processing Flow
+
+```mermaid
+sequenceDiagram
+    participant Ext as Chrome Extension
+    participant Node as Node.js Server
+    participant DG as Deepgram
+    participant Py as Python Service
+    participant FE as Frontend
+
+    Note over Ext,FE: Phase 1: Recording
+    Ext->>Node: POST /video-chunk (sequence 0,1,2...)
+    Ext->>Node: POST /audio-chunk (sequence 0,1,2...)
+    Node->>Node: Stream to uploads/video_session_XXX.webm
+    Node->>Node: Stream to uploads/audio_session_XXX.webm
+    
+    Note over Ext,FE: Phase 2: Finalization
+    Ext->>Node: POST /process-recording (events + metadata)
+    Node->>Node: Finalize streams
+    Node->>Node: Move to recordings/recording_session_XXX_video.webm
+    Node->>Node: Move to recordings/recording_session_XXX_audio.webm
+    Node->>Node: Save recordings/recording_session_XXX.json
+    
+    Note over Ext,FE: Phase 3: Broadcast Video (Immediate)
+    Node->>FE: emit('video', {path, metadata})
+    FE->>FE: Display video player
+    
+    Note over Ext,FE: Phase 4: AI Processing
+    Node->>DG: Transcribe audio file
+    DG-->>Node: {text, confidence}
+    Node->>Py: POST /audio-full-process {text, domEvents}
+    Py->>Py: Process with 11Labs
+    Py->>Py: Save processed_audio_session_XXX.webm
+    Py-->>Node: {processed_audio_filename, instructions}
+    
+    Note over Ext,FE: Phase 5: Broadcast Results
+    Node->>FE: emit('audio', {path, text})
+    FE->>FE: Display audio player + transcript
+    
+    loop For each instruction
+        Node->>FE: emit('instructions', instruction)
+        FE->>FE: Add to timeline
+    end
+```
+
+## File Flow Diagram
+
+```mermaid
+graph LR
+    subgraph Temporary["Temporary Storage (src/uploads/)"]
+        T1[video_session_XXX.webm]
+        T2[audio_session_XXX.webm]
+    end
+    
+    subgraph Permanent["Permanent Storage (src/recordings/)"]
+        P1[recording_session_XXX_video.webm]
+        P2[recording_session_XXX_audio.webm]
+        P3[recording_session_XXX_timestamp.json]
+    end
+    
+    subgraph Processed["Processed Storage (recordings/)"]
+        PR1[processed_audio_session_XXX_timestamp.webm]
+    end
+    
+    subgraph Frontend["Frontend Access"]
+        F1[GET /recordings/recording_session_XXX_video.webm]
+        F2[GET /recordings/processed_audio_session_XXX.webm]
+    end
+    
+    T1 -->|Move after finalization| P1
+    T2 -->|Move after finalization| P2
+    P2 -->|Send to Deepgram| DG[Deepgram]
+    DG -->|Text| PY[Python]
+    PY -->|11Labs Processing| PR1
+    P1 --> F1
+    PR1 --> F2
+```
+
+## WebSocket Event Flow
+
+```mermaid
+graph TD
+    subgraph Node["Node.js Server"]
+        N1[Recording Controller]
+        N2[Frontend Service]
+        N3[Message Queue]
+    end
+    
+    subgraph Frontend["Frontend Client"]
+        F1[Socket Connection]
+        F2[Event Handlers]
+    end
+    
+    N1 -->|sendVideo| N2
+    N1 -->|sendAudio| N2
+    N1 -->|sendInstructions| N2
+    
+    N2 -->|Check connection| Decision{Client Connected?}
+    Decision -->|Yes| F1
+    Decision -->|No| N3
+    
+    F1 -->|emit 'register'| N2
+    N2 -->|Flush queue| F1
+    
+    F1 -->|on 'video'| F2
+    F1 -->|on 'audio'| F2
+    F1 -->|on 'instructions'| F2
+```
+
+## Data Structure Flow
+
+```mermaid
+graph LR
+    subgraph Input["Extension Input"]
+        I1["Video Chunks<br/>(Binary WebM)"]
+        I2["Audio Chunks<br/>(Binary WebM)"]
+        I3["DOM Events<br/>(JSON Array)"]
+        I4["Metadata<br/>(JSON Object)"]
+    end
+    
+    subgraph Processing["Node Processing"]
+        P1["Assembled Video<br/>(WebM File)"]
+        P2["Assembled Audio<br/>(WebM File)"]
+        P3["Deepgram Text<br/>(String)"]
+    end
+    
+    subgraph Python["Python Processing"]
+        PY1["11Labs Audio<br/>(WebM File)"]
+        PY2["AI Instructions<br/>(JSON Array)"]
+    end
+    
+    subgraph Output["Frontend Output"]
+        O1["Video Data<br/>{path, metadata}"]
+        O2["Audio Data<br/>{path, text}"]
+        O3["Instructions<br/>(Individual Events)"]
+    end
+    
+    I1 --> P1
+    I2 --> P2
+    P2 --> P3
+    P3 --> PY1
+    I3 --> PY2
+    
+    P1 --> O1
+    PY1 --> O2
+    P3 --> O2
+    PY2 --> O3
+    I3 -.Fallback.-> O3
+```
+
+## Session Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Recording: Extension starts
+    Recording --> ChunkStreaming: Sending chunks
+    ChunkStreaming --> ChunkStreaming: More chunks
+    ChunkStreaming --> Finalizing: Stop recording
+    Finalizing --> Processing: Files ready
+    Processing --> Transcribing: Deepgram
+    Transcribing --> AIProcessing: Python
+    AIProcessing --> Broadcasting: WebSocket
+    Broadcasting --> Complete: All data sent
+    Complete --> [*]
+    
+    note right of ChunkStreaming
+        Temporary files in uploads/
+        video_session_XXX.webm
+        audio_session_XXX.webm
+    end note
+    
+    note right of Processing
+        Permanent files in recordings/
+        recording_session_XXX_video.webm
+        recording_session_XXX_audio.webm
+        recording_session_XXX.json
+    end note
+    
+    note right of AIProcessing
+        Processed files in recordings/
+        processed_audio_session_XXX.webm
+    end note
+```

@@ -13,6 +13,7 @@
     "node-fetch": "^2.7.0",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.3",
+    "socket.io": "^4.8.1",
     "winston": "^3.17.0"
   },
   "name": "Creuso_Node_layer",

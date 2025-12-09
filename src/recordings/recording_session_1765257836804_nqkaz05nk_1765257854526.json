@@ -1,0 +1,99 @@
+{
+  "sessionId": "session_1765257836804_nqkaz05nk",
+  "startTime": 1765257837060,
+  "endTime": 1765257854459,
+  "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days&tab=billing",
+  "viewport": {
+    "width": 1536,
+    "height": 695
+  },
+  "events": [
+    {
+      "timestamp": 8452,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 10785,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 11988,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [
+          "mdc-tab__text-label"
+        ],
+        "text": "Rate Limit",
+        "selector": "span.mdc-tab__text-label",
+        "bbox": {
+          "x": 421,
+          "y": 117,
+          "width": 66,
+          "height": 14
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 13373,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [
+          "mdc-tab__text-label"
+        ],
+        "text": "Billing",
+        "selector": "span.mdc-tab__text-label",
+        "bbox": {
+          "x": 536,
+          "y": 117,
+          "width": 40,
+          "height": 14
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days&tab=rate-limit",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    }
+  ],
+  "videoPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\recordings\\recording_session_1765257836804_nqkaz05nk_video.webm",
+  "audioPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\recordings\\recording_session_1765257836804_nqkaz05nk_audio.webm",
+  "processedAt": "2025-12-09T05:24:14.526Z"
+}

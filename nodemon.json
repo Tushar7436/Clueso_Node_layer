@@ -1,0 +1,13 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "js,json",
+    "ignore": [
+        "src/uploads/*",
+        "src/recordings/*",
+        "test-frontend-client.html",
+        "*.log"
+    ],
+    "exec": "node src/index.js"
+}

@@ -1,3 +1,4 @@
+// recording-service.js
 const fs = require("fs");
 const path = require("path");
 const { Logger } = require("../config");
@@ -8,68 +9,113 @@ const recordingsDir = path.join(__dirname, "..", "recordings");
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 if (!fs.existsSync(recordingsDir)) fs.mkdirSync(recordingsDir, { recursive: true });
 
-let videoFile = null;
-let audioFile = null;
-let videoFilePath = null;
-let audioFilePath = null;
-let videoBytesWritten = 0;
-let audioBytesWritten = 0;
+// CHANGED: Per-session file streams
+const activeStreams = new Map(); // sessionId -> { videoFile, audioFile, videoBytesWritten, audioBytesWritten }
 
-const getFileStream = (type) => {
-  if (type === "video") {
-    if (!videoFile) {
-      const filename = `video_${Date.now()}.webm`;
-      videoFilePath = path.join(uploadDir, filename);
-      videoFile = fs.createWriteStream(videoFilePath);
-      videoBytesWritten = 0;
-      Logger.info("[SERVICE] Created video file:", filename);
-      Logger.info("[SERVICE] Video file path:", videoFilePath);
-    }
-    return videoFile;
+const getOrCreateStream = (sessionId, type) => {
+  if (!activeStreams.has(sessionId)) {
+    activeStreams.set(sessionId, {
+      videoFile: null,
+      audioFile: null,
+      videoFilePath: null,
+      audioFilePath: null,
+      videoBytesWritten: 0,
+      audioBytesWritten: 0,
+      videoChunks: [],  // Track chunk order
+      audioChunks: []
+    });
   }
 
-  if (type === "audio") {
-    if (!audioFile) {
-      const filename = `audio_${Date.now()}.webm`;
-      audioFilePath = path.join(uploadDir, filename);
-      audioFile = fs.createWriteStream(audioFilePath);
-      audioBytesWritten = 0;
-      Logger.info("[SERVICE] Created audio file:", filename);
-      Logger.info("[SERVICE] Audio file path:", audioFilePath);
-    }
-    return audioFile;
+  const session = activeStreams.get(sessionId);
+
+  if (type === "video" && !session.videoFile) {
+    const filename = `video_${sessionId}.webm`;
+    session.videoFilePath = path.join(uploadDir, filename);
+    session.videoFile = fs.createWriteStream(session.videoFilePath);
+    Logger.info(`[SERVICE] Created video stream for session: ${sessionId}`);
   }
+
+  if (type === "audio" && !session.audioFile) {
+    const filename = `audio_${sessionId}.webm`;
+    session.audioFilePath = path.join(uploadDir, filename);
+    session.audioFile = fs.createWriteStream(session.audioFilePath);
+    Logger.info(`[SERVICE] Created audio stream for session: ${sessionId}`);
+  }
+
+  return session;
 };
 
-const finalizeStream = (type) => {
-  return new Promise((resolve) => {
-    if (type === "video" && videoFile) {
-      Logger.info(`[SERVICE] Finalizing video stream - Total bytes: ${videoBytesWritten}`);
-      videoFile.end(() => {
-        const p = videoFilePath;
-        Logger.info(`[SERVICE] Video stream closed - File: ${p}`);
-        if (fs.existsSync(p)) {
-          const stats = fs.statSync(p);
-          Logger.info(`[SERVICE] Video file size on disk: ${stats.size} bytes`);
+exports.saveChunk = async ({ sessionId, type, chunk, sequence, requestId }) => {
+  return new Promise((resolve, reject) => {
+    try {
+      if (!sessionId) {
+        return reject(new Error("sessionId is required"));
+      }
+
+      const session = getOrCreateStream(sessionId, type);
+      const stream = type === "video" ? session.videoFile : session.audioFile;
+
+      if (!stream) {
+        return reject(new Error(`Failed to create ${type} stream`));
+      }
+
+      Logger.info(`[SERVICE] Saving ${type} chunk for session ${sessionId}`);
+      Logger.info(`[SERVICE] Sequence: ${sequence}, Size: ${chunk.length} bytes`);
+
+      // Store chunk info for ordering verification
+      const chunks = type === "video" ? session.videoChunks : session.audioChunks;
+      chunks.push({ sequence, size: chunk.length, timestamp: Date.now() });
+
+      stream.write(chunk, (err) => {
+        if (err) {
+          Logger.error(`[SERVICE] Error writing ${type} chunk:`, err);
+          return reject(err);
         }
-        videoFile = null;
-        videoFilePath = null;
-        videoBytesWritten = 0;
-        resolve(p);
+
+        if (type === "video") {
+          session.videoBytesWritten += chunk.length;
+          Logger.info(`[SERVICE] Video bytes written: ${session.videoBytesWritten}`);
+        } else {
+          session.audioBytesWritten += chunk.length;
+          Logger.info(`[SERVICE] Audio bytes written: ${session.audioBytesWritten}`);
+        }
+
+        resolve();
       });
-    } else if (type === "audio" && audioFile) {
-      Logger.info(`[SERVICE] Finalizing audio stream - Total bytes: ${audioBytesWritten}`);
-      audioFile.end(() => {
-        const p = audioFilePath;
-        Logger.info(`[SERVICE] Audio stream closed - File: ${p}`);
-        if (fs.existsSync(p)) {
-          const stats = fs.statSync(p);
-          Logger.info(`[SERVICE] Audio file size on disk: ${stats.size} bytes`);
-        }
-        audioFile = null;
-        audioFilePath = null;
-        audioBytesWritten = 0;
-        resolve(p);
+    } catch (err) {
+      Logger.error(`[SERVICE] Error in saveChunk:`, err);
+      reject(err);
+    }
+  });
+};
+
+const finalizeStream = (sessionId, type) => {
+  return new Promise((resolve) => {
+    if (!activeStreams.has(sessionId)) {
+      return resolve(null);
+    }
+
+    const session = activeStreams.get(sessionId);
+
+    if (type === "video" && session.videoFile) {
+      Logger.info(`[SERVICE] Finalizing video for session ${sessionId}`);
+      Logger.info(`[SERVICE] Total chunks: ${session.videoChunks.length}`);
+      Logger.info(`[SERVICE] Total bytes: ${session.videoBytesWritten}`);
+
+      session.videoFile.end(() => {
+        const path = session.videoFilePath;
+        Logger.info(`[SERVICE] Video stream closed: ${path}`);
+        resolve(path);
+      });
+    } else if (type === "audio" && session.audioFile) {
+      Logger.info(`[SERVICE] Finalizing audio for session ${sessionId}`);
+      Logger.info(`[SERVICE] Total chunks: ${session.audioChunks.length}`);
+      Logger.info(`[SERVICE] Total bytes: ${session.audioBytesWritten}`);
+
+      session.audioFile.end(() => {
+        const path = session.audioFilePath;
+        Logger.info(`[SERVICE] Audio stream closed: ${path}`);
+        resolve(path);
       });
     } else {
       resolve(null);
@@ -77,79 +123,71 @@ const finalizeStream = (type) => {
   });
 };
 
-exports.getStreamFilePath = (type) => {
-  if (type === "video" && videoFilePath) return videoFilePath;
-  if (type === "audio" && audioFilePath) return audioFilePath;
-  return null;
-};
-
-exports.saveChunk = async ({ type, chunk, requestId }) => {
-  return new Promise((resolve, reject) => {
-    try {
-      const stream = getFileStream(type);
-
-      Logger.info(`[SERVICE] Saving ${type} chunk - Request ID: ${requestId}`);
-      Logger.info(`[SERVICE] Chunk is Buffer: ${Buffer.isBuffer(chunk)}`);
-      Logger.info(`[SERVICE] Chunk size: ${chunk ? chunk.length : 0} bytes`);
-
-      // CRITICAL FIX: Don't wrap in Buffer.from() if it's already a Buffer
-      // This was causing data corruption and duplication
-      const dataToWrite = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
-
-      Logger.info(`[SERVICE] Writing ${dataToWrite.length} bytes to ${type} stream`);
-
-      stream.write(dataToWrite, (err) => {
-        if (err) {
-          Logger.error(`[SERVICE] Error writing ${type} chunk:`, err);
-          return reject(err);
-        }
-
-        // Update byte counters
-        if (type === "video") {
-          videoBytesWritten += dataToWrite.length;
-          Logger.info(`[SERVICE] Total video bytes written: ${videoBytesWritten}`);
-        } else if (type === "audio") {
-          audioBytesWritten += dataToWrite.length;
-          Logger.info(`[SERVICE] Total audio bytes written: ${audioBytesWritten}`);
-        }
-
-        Logger.info(`[SERVICE] Successfully wrote ${type} chunk - Request ID: ${requestId}`);
-        resolve();
-      });
-    } catch (err) {
-      Logger.error(`[SERVICE] Error in saveChunk for ${type}:`, err);
-      reject(err);
-    }
-  });
-};
-
 exports.processRecording = async ({ events, metadata, videoPath, audioPath }) => {
   try {
-    Logger.info(
-      `[SERVICE] Processing ${events.length} events for session: ${metadata.sessionId}`
-    );
+    let sessionId = metadata.sessionId;
+    Logger.info(`[SERVICE] Processing recording for session: ${sessionId}`);
 
-    let finalAudioPath = audioPath || (await finalizeStream("audio"));
-    let finalVideoPath = videoPath || (await finalizeStream("video"));
+    // DEBUG: Log active sessions
+    Logger.info(`[SERVICE] Active sessions: ${Array.from(activeStreams.keys()).join(', ')}`);
+    Logger.info(`[SERVICE] Session exists in activeStreams: ${activeStreams.has(sessionId)}`);
 
-    // Move files to recordings directory with proper naming
+    // WORKAROUND: If requested session doesn't exist, use the most recent one
+    if (!activeStreams.has(sessionId) && activeStreams.size > 0) {
+      const activeSessions = Array.from(activeStreams.keys());
+      const fallbackSession = activeSessions[activeSessions.length - 1];
+      Logger.warn(`[SERVICE] SessionId mismatch! Requested: ${sessionId}, Using fallback: ${fallbackSession}`);
+      sessionId = fallbackSession;
+    }
+
+    // Finalize streams for this session
+    let finalAudioPath = audioPath || (await finalizeStream(sessionId, "audio"));
+    let finalVideoPath = videoPath || (await finalizeStream(sessionId, "video"));
+
+    // DEBUG: Log what we got
+    Logger.info(`[SERVICE] finalAudioPath: ${finalAudioPath}`);
+    Logger.info(`[SERVICE] finalVideoPath: ${finalVideoPath}`);
+
+    // Clean up session from active streams
+    if (activeStreams.has(sessionId)) {
+      const session = activeStreams.get(sessionId);
+
+      // Log chunk statistics
+      Logger.info(`[SERVICE] Session ${sessionId} statistics:`);
+      Logger.info(`[SERVICE] Video chunks received: ${session.videoChunks.length}`);
+      Logger.info(`[SERVICE] Audio chunks received: ${session.audioChunks.length}`);
+
+      // Check for missing sequences
+      if (session.videoChunks.length > 0) {
+        const videoSequences = session.videoChunks.map(c => c.sequence).sort((a, b) => a - b);
+        const missingVideo = [];
+        for (let i = 0; i < videoSequences[videoSequences.length - 1]; i++) {
+          if (!videoSequences.includes(i)) missingVideo.push(i);
+        }
+        if (missingVideo.length > 0) {
+          Logger.warn(`[SERVICE] Missing video chunks: ${missingVideo.join(', ')}`);
+        }
+      }
+
+      activeStreams.delete(sessionId);
+    }
+
+    // Move files to permanent location
     let permanentVideoPath = null;
     let permanentAudioPath = null;
 
     if (finalVideoPath && fs.existsSync(finalVideoPath)) {
-      permanentVideoPath = path.join(recordingsDir, `recording_${metadata.sessionId}_video.webm`);
-      Logger.info(`[SERVICE] Moving video from ${finalVideoPath} to ${permanentVideoPath}`);
+      permanentVideoPath = path.join(recordingsDir, `recording_${sessionId}_video.webm`);
       fs.copyFileSync(finalVideoPath, permanentVideoPath);
-      fs.unlinkSync(finalVideoPath); // Delete temp file
-      Logger.info(`[SERVICE] Video file moved successfully`);
+      fs.unlinkSync(finalVideoPath);
+      Logger.info(`[SERVICE] Video moved to: ${permanentVideoPath}`);
     }
 
     if (finalAudioPath && fs.existsSync(finalAudioPath)) {
-      permanentAudioPath = path.join(recordingsDir, `recording_${metadata.sessionId}_audio.webm`);
-      Logger.info(`[SERVICE] Moving audio from ${finalAudioPath} to ${permanentAudioPath}`);
+      permanentAudioPath = path.join(recordingsDir, `recording_${sessionId}_audio.webm`);
       fs.copyFileSync(finalAudioPath, permanentAudioPath);
-      fs.unlinkSync(finalAudioPath); // Delete temp file
-      Logger.info(`[SERVICE] Audio file moved successfully`);
+      fs.unlinkSync(finalAudioPath);
+      Logger.info(`[SERVICE] Audio moved to: ${permanentAudioPath}`);
     }
 
     const recordingData = {
@@ -169,9 +207,7 @@ exports.processRecording = async ({ events, metadata, videoPath, audioPath }) =>
 
     fs.writeFileSync(filePath, JSON.stringify(recordingData, null, 2), "utf8");
 
-    Logger.info(`[SERVICE] Saved recording data to: ${filename}`);
-    Logger.info(`[SERVICE] Video path: ${permanentVideoPath}`);
-    Logger.info(`[SERVICE] Audio path: ${permanentAudioPath}`);
+    Logger.info(`[SERVICE] Recording saved: ${filename}`);
 
     return {
       success: true,

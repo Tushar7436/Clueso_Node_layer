@@ -1,10 +1,11 @@
 const fetch = require('node-fetch');
+const path = require('path');
 const { Logger } = require('../config');
 
 class PythonService {
   constructor() {
     this.pythonBaseUrl = process.env.PYTHON_LAYER_URL || 'http://localhost:8000';
-    this.timeout = parseInt(process.env.PYTHON_SERVICE_TIMEOUT || '30000', 10);
+    this.timeout = parseInt(process.env.PYTHON_SERVICE_TIMEOUT || '3000', 10);
   }
 
   /**
@@ -12,13 +13,16 @@ class PythonService {
    * @param {string} text - Transcribed text from Deepgram
    * @param {Array} domEvents - Array of DOM events with timestamps
    * @param {object} metadata - Additional metadata (sessionId, url, viewport, etc.)
+   * @param {object} deepgramResponse - Full Deepgram JSON response (text, timeline, metadata, raw)
    * @returns {Promise<object>} - Response from Python layer
    */
-  async sendTextWithDomEvents(text, domEvents = [], metadata = {}) {
+  async sendTextWithDomEvents(text, domEvents = [], metadata = {}, deepgramResponse = null) {
     try {
       const payload = {
         text: text,
         domEvents: domEvents,
+        recordingsPath: path.resolve(__dirname, '../../recordings'), // Add recordings path
+        deepgramResponse: deepgramResponse, // Include full Deepgram JSON response
         metadata: {
           sessionId: metadata.sessionId,
           url: metadata.url,
@@ -34,7 +38,9 @@ class PythonService {
       Logger.debug(`[Python Service] Payload:`, {
         textLength: text.length,
         eventsCount: domEvents.length,
-        sessionId: metadata.sessionId
+        sessionId: metadata.sessionId,
+        hasDeepgramResponse: !!deepgramResponse,
+        deepgramTimelineSegments: deepgramResponse?.timeline?.length || 0
       });
 
       // Create AbortController for timeout handling
@@ -60,21 +66,21 @@ class PythonService {
 
       const result = await response.json();
       Logger.info('[Python Service] Successfully received response from Python layer');
-      
+
       return result;
     } catch (error) {
       Logger.error('[Python Service] Error sending data to Python layer:', error);
-      
+
       // Handle timeout errors
       if (error.name === 'AbortError' || error.message.includes('timeout')) {
         throw new Error(`Request to Python layer timed out after ${this.timeout}ms`);
       }
-      
+
       // Handle network errors
       if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
         throw new Error(`Cannot connect to Python layer at ${this.pythonBaseUrl}. Is the Python server running?`);
       }
-      
+
       throw error;
     }
   }
@@ -111,19 +117,19 @@ class PythonService {
 
       const result = await response.json();
       Logger.info('[Python Service] Successfully received response from Python layer');
-      
+
       return result;
     } catch (error) {
       Logger.error('[Python Service] Error sending raw data to Python layer:', error);
-      
+
       if (error.name === 'AbortError' || error.message.includes('timeout')) {
         throw new Error(`Request to Python layer timed out after ${this.timeout}ms`);
       }
-      
+
       if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
         throw new Error(`Cannot connect to Python layer at ${this.pythonBaseUrl}. Is the Python server running?`);
       }
-      
+
       throw error;
     }
   }

@@ -1,0 +1,327 @@
+{
+  "sessionId": "session_1765253080664_m9xkdrdc0",
+  "startTime": 1765253080675,
+  "endTime": 1765253133018,
+  "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days&tab=rate-limit",
+  "viewport": {
+    "width": 1536,
+    "height": 695
+  },
+  "events": [
+    {
+      "timestamp": 9918,
+      "type": "focus",
+      "target": {
+        "tag": "INPUT",
+        "id": "input-1B6907F0-1626-433F-BBAC-DFB989A587DC",
+        "classes": [
+          "has-icon",
+          "ng-pristine",
+          "ng-valid",
+          "ng-star-inserted",
+          "ng-touched"
+        ],
+        "text": null,
+        "selector": "#input-1B6907F0-1626-433F-BBAC-DFB989A587DC",
+        "bbox": {
+          "x": 307,
+          "y": 104,
+          "width": 399,
+          "height": 32
+        },
+        "attributes": {
+          "aria-label": "Search for a project",
+          "type": "text"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 9925,
+      "type": "blur",
+      "target": {
+        "tag": "INPUT",
+        "id": "input-1B6907F0-1626-433F-BBAC-DFB989A587DC",
+        "classes": [
+          "has-icon",
+          "ng-pristine",
+          "ng-valid",
+          "ng-star-inserted",
+          "ng-touched"
+        ],
+        "text": null,
+        "selector": "#input-1B6907F0-1626-433F-BBAC-DFB989A587DC",
+        "bbox": {
+          "x": 307,
+          "y": 104,
+          "width": 399,
+          "height": 32
+        },
+        "attributes": {
+          "aria-label": "Search for a project",
+          "type": "text"
+        },
+        "type": "text",
+        "name": null
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 10138,
+      "type": "click",
+      "target": {
+        "tag": "TH",
+        "id": null,
+        "classes": [
+          "mat-mdc-header-cell",
+          "mdc-data-table__header-cell",
+          "cdk-header-cell",
+          "cdk-column-Project",
+          "mat-column-Project",
+          "ng-star-inserted"
+        ],
+        "text": "Project",
+        "selector": "th.mat-mdc-header-cell.mdc-data-table__header-cell.cdk-header-cell.cdk-column-Project.mat-column-Project.ng-star-inserted",
+        "bbox": {
+          "x": 307,
+          "y": 156,
+          "width": 528,
+          "height": 48
+        },
+        "attributes": {
+          "role": "columnheader"
+        }
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 12453,
+      "type": "click",
+      "target": {
+        "tag": "BUTTON",
+        "id": null,
+        "classes": [
+          "project-table-link",
+          "ms-button-link"
+        ],
+        "text": "ProductTextGeneration",
+        "selector": "button.project-table-link.ms-button-link",
+        "bbox": {
+          "x": 307,
+          "y": 220,
+          "width": 152,
+          "height": 24
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 14896,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [
+          "material-symbols-outlined",
+          "notranslate",
+          "ms-button-icon-symbol",
+          "ng-star-inserted"
+        ],
+        "text": "close",
+        "selector": "span.material-symbols-outlined.notranslate.ms-button-icon-symbol.ng-star-inserted",
+        "bbox": {
+          "x": 976,
+          "y": 170,
+          "width": 18,
+          "height": 18
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 19919,
+      "type": "click",
+      "target": {
+        "tag": "BUTTON",
+        "id": null,
+        "classes": [
+          "project-table-link",
+          "api-key-count-button",
+          "ms-button-link"
+        ],
+        "text": "1 key",
+        "selector": "button.project-table-link.api-key-count-button.ms-button-link",
+        "bbox": {
+          "x": 852,
+          "y": 220,
+          "width": 33,
+          "height": 24
+        },
+        "attributes": {
+          "aria-label": "View API keys"
+        }
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/projects",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 26163,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [
+          "material-symbols-outlined",
+          "notranslate",
+          "ms-button-icon-symbol",
+          "ng-star-inserted"
+        ],
+        "text": "bar_chart",
+        "selector": "span.material-symbols-outlined.notranslate.ms-button-icon-symbol.ng-star-inserted",
+        "bbox": {
+          "x": 1384,
+          "y": 245,
+          "width": 18,
+          "height": 18
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/api-keys?projectFilter=gen-lang-client-0151852985",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 34047,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 34779,
+      "type": "click",
+      "target": {
+        "tag": "SPAN",
+        "id": null,
+        "classes": [
+          "mdc-tab__content"
+        ],
+        "text": "Rate Limit",
+        "selector": "span.mdc-tab__content",
+        "bbox": {
+          "x": 421,
+          "y": 100,
+          "width": 66,
+          "height": 48
+        },
+        "attributes": {}
+      },
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        }
+      }
+    },
+    {
+      "timestamp": 38762,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days&tab=rate-limit",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 46347,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days&tab=rate-limit",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "timestamp": 46948,
+      "type": "scroll",
+      "metadata": {
+        "url": "https://aistudio.google.com/app/usage?project=gen-lang-client-0151852985&timeRange=last-28-days&tab=rate-limit",
+        "viewport": {
+          "width": 1536,
+          "height": 695
+        },
+        "scrollPosition": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "videoPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\recordings\\recording_session_1765253080664_m9xkdrdc0_video.webm",
+  "audioPath": "D:\\Code\\FullStack\\Clueso_Node_layer\\src\\recordings\\recording_session_1765253080664_m9xkdrdc0_audio.webm",
+  "processedAt": "2025-12-09T04:05:33.124Z"
+}

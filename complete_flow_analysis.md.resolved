@@ -1,0 +1,398 @@
+# Complete Data Flow Analysis - Clueso Node Layer
+
+## Project Overview
+
+Your Node.js project serves as the **middle layer** between:
+- **Chrome Extension** (sends raw recordings)
+- **Python Service** (AI processing with 11Labs)
+- **Frontend Platform** (receives processed data for editing)
+
+## Current Architecture
+
+```mermaid
+graph LR
+    A[Chrome Extension] -->|Raw Video Chunks| B[Node.js Layer]
+    A -->|Raw Audio Chunks| B
+    A -->|DOM Events| B
+    B -->|Raw Audio| C[Deepgram API]
+    C -->|Transcribed Text| B
+    B -->|Text + Events| D[Python Service]
+    D -->|Processed Audio 11Labs| B
+    D -->|Instructions Optional| B
+    B -->|Video + Audio + Instructions| E[Frontend via WebSocket]
+```
+
+## Data Flow Steps
+
+### 1. **Extension → Node.js** (Recording Phase)
+
+#### Chunk Upload (Streaming)
+- **Endpoint**: `POST /api/recording/video-chunk`
+- **Endpoint**: `POST /api/recording/audio-chunk`
+- **Format**: FormData with binary chunks
+- **Storage**: Temporary files in `src/uploads/`
+
+**Files Involved**:
+- [recording-routes.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/routes/v1/recording-routes.js)
+- [recording-controller.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/controllers/recording-controller.js#L9-L61)
+- [recording-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/recording-service.js#L48-L90)
+
+**Process**:
+```javascript
+// 1. Extension sends chunks via FormData
+FormData: {
+  sessionId: "session_1765089986708_lyv7icnrb",
+  sequence: 0,
+  chunk: <binary data>
+}
+
+// 2. Node receives and streams to file
+// Creates: uploads/video_session_XXX.webm
+// Creates: uploads/audio_session_XXX.webm
+```
+
+#### Finalization (Process Recording)
+- **Endpoint**: `POST /api/recording/process-recording`
+- **Payload**: events (JSON), metadata (JSON), video (optional), audio (optional)
+
+**Process**:
+```javascript
+// 1. Finalizes streams
+// 2. Moves files to permanent location
+//    From: src/uploads/video_session_XXX.webm
+//    To:   src/recordings/recording_session_XXX_video.webm
+//    To:   src/recordings/recording_session_XXX_audio.webm
+// 3. Saves JSON metadata
+//    To:   src/recordings/recording_session_XXX_timestamp.json
+```
+
+### 2. **Node.js → Deepgram** (Transcription)
+
+**File**: [deepgram-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/deepgram-service.js)
+
+**Process**:
+```javascript
+// Input: src/recordings/recording_session_XXX_audio.webm
+const transcription = await DeepgramService.transcribeAudio(audioPath, {
+  model: "nova-2",
+  language: "en-US",
+  punctuate: true
+});
+
+// Output:
+{
+  text: "Hello, guys. This is Tushar...",
+  confidence: 0.95,
+  metadata: {...}
+}
+```
+
+### 3. **Node.js → Python** (AI Processing)
+
+**File**: [python-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/python-service.js)
+
+**Endpoint**: `POST http://localhost:8000/audio-full-process`
+
+**Payload**:
+```javascript
+{
+  text: "Transcribed text from Deepgram",
+  domEvents: [
+    {
+      timestamp: 3763,
+      type: "click",
+      target: {
+        tag: "DIV",
+        classes: ["flex", "h-8"],
+        text: "Projects",
+        selector: "div.flex.h-8...",
+        bbox: { x: 508, y: 188, width: 932, height: 32 }
+      }
+    }
+  ],
+  recordingsPath: "D:\\Code\\FullStack\\Clueso_Node_layer\\recordings",
+  metadata: {
+    sessionId: "session_XXX",
+    url: "https://example.com",
+    viewport: { width: 1536, height: 695 },
+    startTime: 1765089986954,
+    endTime: 1765090028521
+  }
+}
+```
+
+**Expected Response from Python**:
+```javascript
+{
+  processed_audio_filename: "processed_audio_session_XXX_timestamp.webm",
+  instructions: [
+    {
+      type: "click",
+      target: "button.submit",
+      timestamp: 1765087655000,
+      x: 450,
+      y: 320,
+      metadata: {
+        text: "Submit",
+        classes: ["btn", "btn-primary"]
+      }
+    }
+  ]
+}
+```
+
+**Python Should**:
+1. Receive text + DOM events
+2. Process audio with 11Labs (text-to-speech with better voice)
+3. Save processed audio to: `recordings/processed_audio_session_XXX_timestamp.webm`
+4. Return filename and optionally AI-generated instructions
+
+### 4. **Node.js → Frontend** (WebSocket Delivery)
+
+**Files**:
+- [frontend-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/frontend-service.js)
+- [frontend-controller.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/controllers/frontend-controller.js)
+- [frontend-routes.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/routes/v1/frontend-routes.js)
+
+**Socket.IO Events**:
+
+#### Event 1: `video` (Sent Immediately)
+```javascript
+{
+  filename: "recording_session_1765089986708_lyv7icnrb_video.webm",
+  path: "/recordings/recording_session_1765089986708_lyv7icnrb_video.webm",
+  metadata: {
+    sessionId: "session_1765089986708_lyv7icnrb",
+    startTime: 1765089986954,
+    endTime: 1765090028521,
+    url: "https://vercel.com/tushar7436s-projects",
+    viewport: { width: 1536, height: 695 }
+  },
+  timestamp: "2025-12-07T11:38:02.123Z"
+}
+```
+
+#### Event 2: `audio` (After Python Processing)
+```javascript
+{
+  filename: "processed_audio_session_1765089986708_lyv7icnrb_1765090041930.webm",
+  path: "/recordings/processed_audio_session_1765089986708_lyv7icnrb_1765090041930.webm",
+  text: "Hello, guys. This is Tushar, and this is my website, Claude.",
+  timestamp: "2025-12-07T11:38:22.456Z"
+}
+```
+
+**Fallback**: If Python doesn't return processed audio, sends raw audio instead.
+
+#### Event 3: `instructions` (Multiple Events)
+Each instruction is sent individually:
+
+```javascript
+// If Python returns instructions:
+{
+  type: "click",
+  target: "button.submit",
+  timestamp: 1765087655000,
+  x: 450,
+  y: 320,
+  metadata: {
+    text: "Submit",
+    classes: ["btn", "btn-primary"]
+  }
+}
+
+// Fallback: DOM events as instructions
+{
+  timestamp: 3763,
+  type: "click",
+  target: {
+    tag: "DIV",
+    classes: ["flex", "h-8"],
+    text: "Projects",
+    selector: "div.flex.h-8...",
+    bbox: { x: 508, y: 188, width: 932, height: 32 }
+  }
+}
+```
+
+## File Storage Structure
+
+```
+Clueso_Node_layer/
+├── src/
+│   ├── uploads/                    # Temporary chunk storage
+│   │   ├── video_session_XXX.webm  (deleted after processing)
+│   │   └── audio_session_XXX.webm  (deleted after processing)
+│   │
+│   └── recordings/                 # Permanent storage
+│       ├── recording_session_XXX_video.webm          # Raw screen recording
+│       ├── recording_session_XXX_audio.webm          # Raw audio
+│       └── recording_session_XXX_timestamp.json      # Metadata + events
+│
+└── recordings/                     # Root-level (Python writes here)
+    └── processed_audio_session_XXX_timestamp.webm    # 11Labs processed audio
+```
+
+## Key Files Reference
+
+### Routes
+- [recording-routes.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/routes/v1/recording-routes.js) - Extension endpoints
+- [frontend-routes.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/routes/v1/frontend-routes.js) - Python callback endpoints
+
+### Controllers
+- [recording-controller.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/controllers/recording-controller.js) - Main processing logic
+- [frontend-controller.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/controllers/frontend-controller.js) - Python callbacks
+
+### Services
+- [recording-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/recording-service.js) - File management
+- [deepgram-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/deepgram-service.js) - Transcription
+- [python-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/python-service.js) - Python communication
+- [frontend-service.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/services/frontend-service.js) - WebSocket management
+
+### Server Entry
+- [index.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/index.js) - Server initialization
+
+## Frontend Integration
+
+### Connection Setup
+```javascript
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
+
+// Register for session
+socket.emit('register', sessionId);
+
+// Confirmation
+socket.on('registered', (data) => {
+  console.log('Registered:', data.sessionId);
+});
+```
+
+### Event Listeners
+```javascript
+// 1. Receive video
+socket.on('video', (videoData) => {
+  const videoUrl = `http://localhost:3000${videoData.path}`;
+  // Load video: http://localhost:3000/recordings/recording_session_XXX_video.webm
+});
+
+// 2. Receive processed audio
+socket.on('audio', (audioData) => {
+  const audioUrl = `http://localhost:3000${audioData.path}`;
+  const transcription = audioData.text;
+  // Load audio: http://localhost:3000/recordings/processed_audio_session_XXX.webm
+});
+
+// 3. Receive instructions (multiple events)
+socket.on('instructions', (instruction) => {
+  // Each instruction arrives separately
+  console.log('Instruction:', instruction);
+});
+```
+
+## Message Buffering System
+
+**Problem**: Frontend might connect after data is ready.
+
+**Solution**: Messages are queued until frontend connects.
+
+```javascript
+// When no client connected
+frontendService.sendVideo(sessionId, videoData);
+// → Buffered in messageQueue
+
+// When client connects
+socket.emit('register', sessionId);
+// → All buffered messages flushed immediately
+```
+
+## Python Service Requirements
+
+### What Python Should Do
+
+1. **Receive** from Node.js at `/audio-full-process`:
+   - `text` - Transcribed text from Deepgram
+   - `domEvents` - Array of user interactions
+   - `recordingsPath` - Path to save processed audio
+   - `metadata` - Session info
+
+2. **Process**:
+   - Convert text to speech using 11Labs
+   - Optionally analyze DOM events to generate AI instructions
+   - Save processed audio to: `{recordingsPath}/processed_audio_session_{sessionId}_{timestamp}.webm`
+
+3. **Return** to Node.js:
+   ```javascript
+   {
+     processed_audio_filename: "processed_audio_session_XXX_timestamp.webm",
+     instructions: [/* optional AI-generated instructions */]
+   }
+   ```
+
+4. **Alternative**: Python can also send data directly to frontend via:
+   - `POST /api/frontend/send-audio` (with file upload)
+   - `POST /api/frontend/send-video` (with file upload)
+   - `POST /api/frontend/send-instructions` (JSON)
+
+## Current Status
+
+✅ **Working**:
+- Extension → Node.js (chunk streaming)
+- Node.js → Deepgram (transcription)
+- Node.js → Python (sending data)
+- Node.js → Frontend (WebSocket delivery)
+- Message buffering system
+- File management and storage
+
+⚠️ **Needs Verification**:
+- Python service response format
+- Python saving processed audio to correct location
+- Python returning correct filename
+- Frontend WebSocket connection and event handling
+
+## Example Recording Data
+
+See actual recording: [recording_session_1765089986708_lyv7icnrb_1765090028574.json](file:///d:/Code/FullStack/Clueso_Node_layer/src/recordings/recording_session_1765089986708_lyv7icnrb_1765090028574.json)
+
+Contains:
+- 15 DOM events (clicks, scrolls)
+- Session metadata
+- Video/audio file paths
+- Viewport information
+- URL tracking
+
+## Static File Serving
+
+Files are served from:
+- `/recordings/*` → `recordings/` directory
+- `/uploads/*` → `uploads/` directory
+
+Configured in [index.js](file:///d:/Code/FullStack/Clueso_Node_layer/src/index.js#L20-L23)
+
+## Environment Variables
+
+Required in `.env`:
+```env
+PORT=3000
+DEEPGRAM_API_KEY=your_key_here
+PYTHON_LAYER_URL=http://localhost:8000
+PYTHON_SERVICE_TIMEOUT=30000
+```
+
+## Next Steps
+
+1. **Verify Python Integration**:
+   - Ensure Python saves to `recordings/processed_audio_session_XXX_timestamp.webm`
+   - Confirm Python returns correct response format
+   - Test 11Labs audio processing
+
+2. **Frontend Testing**:
+   - Connect frontend via Socket.IO
+   - Verify all three event types are received
+   - Test file loading from static paths
+
+3. **Error Handling**:
+   - Test Python service offline scenario
+   - Test Deepgram API failures
+   - Verify fallback mechanisms work
