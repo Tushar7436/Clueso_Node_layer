@@ -1,0 +1,2206 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "1379617f-42d3-45d6-8b80-84860d89d8a0",
+    "sha256": "106b24718456b37d0362abc7b8f830ef8da762d1c655762764ab277c1ff5d428",
+    "created": "2025-12-22T10:02:08.730Z",
+    "duration": 77.46,
+    "channels": 1,
+    "models": [
+      "1abfe86b-e047-4eed-858a-35e5625b41ee"
+    ],
+    "model_info": {
+      "1abfe86b-e047-4eed-858a-35e5625b41ee": {
+        "name": "2-general-nova",
+        "version": "2024-01-06.5664",
+        "arch": "nova-2"
+      }
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "So this is my product, Airbnb. You can, uh, book your stay, uh, even before you, uh, take a flight or take a getaway to your destination. It's pretty simple. Search where you want to go. Let's see. I want to go to cherry blossoms. K. So I'm flexible with the dates. I can go in March for a week. It will be just for single people, and I will hit search. It shows me, uh, the map where the the residents are there as well as the prices over it. I can just hover and see whatever are there. This one looks good. Yeah. This one looks cozy enough. Let's see the rating. It is a four point five rated, so I think they should be good to go. I will hit reserve, and I will enable to go.",
+            "confidence": 0.99609375,
+            "words": [
+              {
+                "word": "so",
+                "start": 0.88,
+                "end": 1.28,
+                "confidence": 0.9980469,
+                "punctuated_word": "So"
+              },
+              {
+                "word": "this",
+                "start": 1.28,
+                "end": 1.5999999,
+                "confidence": 0.9892578,
+                "punctuated_word": "this"
+              },
+              {
+                "word": "is",
+                "start": 1.5999999,
+                "end": 1.68,
+                "confidence": 0.9980469,
+                "punctuated_word": "is"
+              },
+              {
+                "word": "my",
+                "start": 1.68,
+                "end": 1.8399999,
+                "confidence": 0.9951172,
+                "punctuated_word": "my"
+              },
+              {
+                "word": "product",
+                "start": 1.8399999,
+                "end": 2.32,
+                "confidence": 0.88183594,
+                "punctuated_word": "product,"
+              },
+              {
+                "word": "airbnb",
+                "start": 2.32,
+                "end": 2.82,
+                "confidence": 0.96606445,
+                "punctuated_word": "Airbnb."
+              },
+              {
+                "word": "you",
+                "start": 3.6,
+                "end": 3.76,
+                "confidence": 1,
+                "punctuated_word": "You"
+              },
+              {
+                "word": "can",
+                "start": 3.76,
+                "end": 4.08,
+                "confidence": 0.88964844,
+                "punctuated_word": "can,"
+              },
+              {
+                "word": "uh",
+                "start": 4.08,
+                "end": 4.3199997,
+                "confidence": 0.9980469,
+                "punctuated_word": "uh,"
+              },
+              {
+                "word": "book",
+                "start": 4.3199997,
+                "end": 4.48,
+                "confidence": 1,
+                "punctuated_word": "book"
+              },
+              {
+                "word": "your",
+                "start": 4.48,
+                "end": 4.88,
+                "confidence": 0.9951172,
+                "punctuated_word": "your"
+              },
+              {
+                "word": "stay",
+                "start": 4.88,
+                "end": 5.38,
+                "confidence": 0.7692871,
+                "punctuated_word": "stay,"
+              },
+              {
+                "word": "uh",
+                "start": 6.16,
+                "end": 6.66,
+                "confidence": 0.8105469,
+                "punctuated_word": "uh,"
+              },
+              {
+                "word": "even",
+                "start": 7.52,
+                "end": 7.8399997,
+                "confidence": 0.95410156,
+                "punctuated_word": "even"
+              },
+              {
+                "word": "before",
+                "start": 7.8399997,
+                "end": 8.34,
+                "confidence": 1,
+                "punctuated_word": "before"
+              },
+              {
+                "word": "you",
+                "start": 8.48,
+                "end": 8.98,
+                "confidence": 0.94506836,
+                "punctuated_word": "you,"
+              },
+              {
+                "word": "uh",
+                "start": 9.04,
+                "end": 9.28,
+                "confidence": 0.9995117,
+                "punctuated_word": "uh,"
+              },
+              {
+                "word": "take",
+                "start": 9.28,
+                "end": 9.5199995,
+                "confidence": 1,
+                "punctuated_word": "take"
+              },
+              {
+                "word": "a",
+                "start": 9.5199995,
+                "end": 9.679999,
+                "confidence": 0.99609375,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "flight",
+                "start": 9.679999,
+                "end": 10.08,
+                "confidence": 1,
+                "punctuated_word": "flight"
+              },
+              {
+                "word": "or",
+                "start": 10.08,
+                "end": 10.559999,
+                "confidence": 0.9863281,
+                "punctuated_word": "or"
+              },
+              {
+                "word": "take",
+                "start": 10.559999,
+                "end": 10.8,
+                "confidence": 0.9980469,
+                "punctuated_word": "take"
+              },
+              {
+                "word": "a",
+                "start": 10.8,
+                "end": 11.3,
+                "confidence": 0.8798828,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "getaway",
+                "start": 11.5199995,
+                "end": 12.0199995,
+                "confidence": 0.9584961,
+                "punctuated_word": "getaway"
+              },
+              {
+                "word": "to",
+                "start": 12.305,
+                "end": 12.385,
+                "confidence": 0.9873047,
+                "punctuated_word": "to"
+              },
+              {
+                "word": "your",
+                "start": 12.385,
+                "end": 12.625,
+                "confidence": 0.9472656,
+                "punctuated_word": "your"
+              },
+              {
+                "word": "destination",
+                "start": 12.625,
+                "end": 13.125,
+                "confidence": 0.9140625,
+                "punctuated_word": "destination."
+              },
+              {
+                "word": "it's",
+                "start": 13.825001,
+                "end": 14.305,
+                "confidence": 0.9807129,
+                "punctuated_word": "It's"
+              },
+              {
+                "word": "pretty",
+                "start": 14.305,
+                "end": 14.545,
+                "confidence": 0.9980469,
+                "punctuated_word": "pretty"
+              },
+              {
+                "word": "simple",
+                "start": 14.545,
+                "end": 15.045,
+                "confidence": 0.9946289,
+                "punctuated_word": "simple."
+              },
+              {
+                "word": "search",
+                "start": 15.505,
+                "end": 15.825001,
+                "confidence": 0.99902344,
+                "punctuated_word": "Search"
+              },
+              {
+                "word": "where",
+                "start": 15.825001,
+                "end": 16.065,
+                "confidence": 1,
+                "punctuated_word": "where"
+              },
+              {
+                "word": "you",
+                "start": 16.065,
+                "end": 16.225,
+                "confidence": 1,
+                "punctuated_word": "you"
+              },
+              {
+                "word": "want",
+                "start": 16.225,
+                "end": 16.385,
+                "confidence": 1,
+                "punctuated_word": "want"
+              },
+              {
+                "word": "to",
+                "start": 16.385,
+                "end": 16.545,
+                "confidence": 0.99902344,
+                "punctuated_word": "to"
+              },
+              {
+                "word": "go",
+                "start": 16.545,
+                "end": 17.045,
+                "confidence": 0.99853516,
+                "punctuated_word": "go."
+              },
+              {
+                "word": "let's",
+                "start": 17.265,
+                "end": 17.765,
+                "confidence": 0.9855957,
+                "punctuated_word": "Let's"
+              },
+              {
+                "word": "see",
+                "start": 17.905,
+                "end": 18.405,
+                "confidence": 0.80688477,
+                "punctuated_word": "see."
+              },
+              {
+                "word": "i",
+                "start": 18.545,
+                "end": 18.785,
+                "confidence": 0.9741211,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "want",
+                "start": 18.785,
+                "end": 19.025,
+                "confidence": 1,
+                "punctuated_word": "want"
+              },
+              {
+                "word": "to",
+                "start": 19.025,
+                "end": 19.105,
+                "confidence": 0.99902344,
+                "punctuated_word": "to"
+              },
+              {
+                "word": "go",
+                "start": 19.105,
+                "end": 19.265,
+                "confidence": 1,
+                "punctuated_word": "go"
+              },
+              {
+                "word": "to",
+                "start": 19.265,
+                "end": 19.505001,
+                "confidence": 0.99902344,
+                "punctuated_word": "to"
+              },
+              {
+                "word": "cherry",
+                "start": 19.505001,
+                "end": 19.745,
+                "confidence": 0.76123047,
+                "punctuated_word": "cherry"
+              },
+              {
+                "word": "blossoms",
+                "start": 19.745,
+                "end": 20.245,
+                "confidence": 0.99348956,
+                "punctuated_word": "blossoms."
+              },
+              {
+                "word": "k",
+                "start": 26.39,
+                "end": 26.63,
+                "confidence": 0.6184082,
+                "punctuated_word": "K."
+              },
+              {
+                "word": "so",
+                "start": 26.63,
+                "end": 27.13,
+                "confidence": 0.5571289,
+                "punctuated_word": "So"
+              },
+              {
+                "word": "i'm",
+                "start": 28.71,
+                "end": 29.029999,
+                "confidence": 0.96899414,
+                "punctuated_word": "I'm"
+              },
+              {
+                "word": "flexible",
+                "start": 29.029999,
+                "end": 29.509998,
+                "confidence": 1,
+                "punctuated_word": "flexible"
+              },
+              {
+                "word": "with",
+                "start": 29.509998,
+                "end": 29.669998,
+                "confidence": 1,
+                "punctuated_word": "with"
+              },
+              {
+                "word": "the",
+                "start": 29.669998,
+                "end": 29.75,
+                "confidence": 0.9980469,
+                "punctuated_word": "the"
+              },
+              {
+                "word": "dates",
+                "start": 29.75,
+                "end": 30.25,
+                "confidence": 0.9926758,
+                "punctuated_word": "dates."
+              },
+              {
+                "word": "i",
+                "start": 30.47,
+                "end": 30.63,
+                "confidence": 1,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "can",
+                "start": 30.63,
+                "end": 31.13,
+                "confidence": 1,
+                "punctuated_word": "can"
+              },
+              {
+                "word": "go",
+                "start": 31.509998,
+                "end": 31.83,
+                "confidence": 0.9921875,
+                "punctuated_word": "go"
+              },
+              {
+                "word": "in",
+                "start": 31.83,
+                "end": 31.99,
+                "confidence": 0.92822266,
+                "punctuated_word": "in"
+              },
+              {
+                "word": "march",
+                "start": 31.99,
+                "end": 32.489998,
+                "confidence": 0.99121094,
+                "punctuated_word": "March"
+              },
+              {
+                "word": "for",
+                "start": 32.55,
+                "end": 33.05,
+                "confidence": 0.99121094,
+                "punctuated_word": "for"
+              },
+              {
+                "word": "a",
+                "start": 33.67,
+                "end": 33.91,
+                "confidence": 0.9951172,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "week",
+                "start": 33.91,
+                "end": 34.41,
+                "confidence": 0.9970703,
+                "punctuated_word": "week."
+              },
+              {
+                "word": "it",
+                "start": 35.43,
+                "end": 35.59,
+                "confidence": 0.99609375,
+                "punctuated_word": "It"
+              },
+              {
+                "word": "will",
+                "start": 35.59,
+                "end": 35.75,
+                "confidence": 0.98535156,
+                "punctuated_word": "will"
+              },
+              {
+                "word": "be",
+                "start": 35.75,
+                "end": 35.91,
+                "confidence": 0.9838867,
+                "punctuated_word": "be"
+              },
+              {
+                "word": "just",
+                "start": 35.91,
+                "end": 36.149998,
+                "confidence": 0.4050293,
+                "punctuated_word": "just"
+              },
+              {
+                "word": "for",
+                "start": 36.149998,
+                "end": 36.309998,
+                "confidence": 0.9790039,
+                "punctuated_word": "for"
+              },
+              {
+                "word": "single",
+                "start": 36.309998,
+                "end": 36.629997,
+                "confidence": 0.8730469,
+                "punctuated_word": "single"
+              },
+              {
+                "word": "people",
+                "start": 36.629997,
+                "end": 37.129997,
+                "confidence": 0.7836914,
+                "punctuated_word": "people,"
+              },
+              {
+                "word": "and",
+                "start": 37.535004,
+                "end": 37.615,
+                "confidence": 0.99902344,
+                "punctuated_word": "and"
+              },
+              {
+                "word": "i",
+                "start": 37.615,
+                "end": 37.695004,
+                "confidence": 0.99902344,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "will",
+                "start": 37.695004,
+                "end": 37.855003,
+                "confidence": 0.9980469,
+                "punctuated_word": "will"
+              },
+              {
+                "word": "hit",
+                "start": 37.855003,
+                "end": 38.355003,
+                "confidence": 0.99121094,
+                "punctuated_word": "hit"
+              },
+              {
+                "word": "search",
+                "start": 41.695,
+                "end": 41.855003,
+                "confidence": 0.99902344,
+                "punctuated_word": "search."
+              },
+              {
+                "word": "it",
+                "start": 41.855003,
+                "end": 42.095,
+                "confidence": 0.99609375,
+                "punctuated_word": "It"
+              },
+              {
+                "word": "shows",
+                "start": 42.095,
+                "end": 42.415,
+                "confidence": 1,
+                "punctuated_word": "shows"
+              },
+              {
+                "word": "me",
+                "start": 42.415,
+                "end": 42.895,
+                "confidence": 0.9975586,
+                "punctuated_word": "me,"
+              },
+              {
+                "word": "uh",
+                "start": 42.895,
+                "end": 43.135002,
+                "confidence": 1,
+                "punctuated_word": "uh,"
+              },
+              {
+                "word": "the",
+                "start": 43.135002,
+                "end": 43.375,
+                "confidence": 1,
+                "punctuated_word": "the"
+              },
+              {
+                "word": "map",
+                "start": 43.375,
+                "end": 43.615,
+                "confidence": 0.99902344,
+                "punctuated_word": "map"
+              },
+              {
+                "word": "where",
+                "start": 43.615,
+                "end": 44.115,
+                "confidence": 0.97265625,
+                "punctuated_word": "where"
+              },
+              {
+                "word": "the",
+                "start": 44.575,
+                "end": 45.075,
+                "confidence": 0.9980469,
+                "punctuated_word": "the"
+              },
+              {
+                "word": "the",
+                "start": 45.375,
+                "end": 45.535004,
+                "confidence": 0.78515625,
+                "punctuated_word": "the"
+              },
+              {
+                "word": "residents",
+                "start": 45.535004,
+                "end": 46.035004,
+                "confidence": 0.796875,
+                "punctuated_word": "residents"
+              },
+              {
+                "word": "are",
+                "start": 46.175003,
+                "end": 46.335003,
+                "confidence": 1,
+                "punctuated_word": "are"
+              },
+              {
+                "word": "there",
+                "start": 46.335003,
+                "end": 46.835003,
+                "confidence": 1,
+                "punctuated_word": "there"
+              },
+              {
+                "word": "as",
+                "start": 47.135002,
+                "end": 47.295002,
+                "confidence": 0.8354492,
+                "punctuated_word": "as"
+              },
+              {
+                "word": "well",
+                "start": 47.295002,
+                "end": 47.535004,
+                "confidence": 1,
+                "punctuated_word": "well"
+              },
+              {
+                "word": "as",
+                "start": 47.535004,
+                "end": 48.035004,
+                "confidence": 0.99902344,
+                "punctuated_word": "as"
+              },
+              {
+                "word": "the",
+                "start": 49.055,
+                "end": 49.295002,
+                "confidence": 0.8691406,
+                "punctuated_word": "the"
+              },
+              {
+                "word": "prices",
+                "start": 49.295002,
+                "end": 49.695,
+                "confidence": 0.9291992,
+                "punctuated_word": "prices"
+              },
+              {
+                "word": "over",
+                "start": 49.695,
+                "end": 49.935,
+                "confidence": 0.96875,
+                "punctuated_word": "over"
+              },
+              {
+                "word": "it",
+                "start": 49.935,
+                "end": 50.43,
+                "confidence": 0.9946289,
+                "punctuated_word": "it."
+              },
+              {
+                "word": "i",
+                "start": 50.43,
+                "end": 50.510002,
+                "confidence": 1,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "can",
+                "start": 50.510002,
+                "end": 50.75,
+                "confidence": 0.99902344,
+                "punctuated_word": "can"
+              },
+              {
+                "word": "just",
+                "start": 50.75,
+                "end": 51.15,
+                "confidence": 0.9941406,
+                "punctuated_word": "just"
+              },
+              {
+                "word": "hover",
+                "start": 51.15,
+                "end": 51.55,
+                "confidence": 0.95703125,
+                "punctuated_word": "hover"
+              },
+              {
+                "word": "and",
+                "start": 51.55,
+                "end": 51.949997,
+                "confidence": 0.9951172,
+                "punctuated_word": "and"
+              },
+              {
+                "word": "see",
+                "start": 51.949997,
+                "end": 52.35,
+                "confidence": 1,
+                "punctuated_word": "see"
+              },
+              {
+                "word": "whatever",
+                "start": 52.35,
+                "end": 52.67,
+                "confidence": 0.9970703,
+                "punctuated_word": "whatever"
+              },
+              {
+                "word": "are",
+                "start": 52.67,
+                "end": 52.99,
+                "confidence": 0.97998047,
+                "punctuated_word": "are"
+              },
+              {
+                "word": "there",
+                "start": 52.99,
+                "end": 53.49,
+                "confidence": 0.99902344,
+                "punctuated_word": "there."
+              },
+              {
+                "word": "this",
+                "start": 60.03,
+                "end": 60.190002,
+                "confidence": 0.9633789,
+                "punctuated_word": "This"
+              },
+              {
+                "word": "one",
+                "start": 60.190002,
+                "end": 60.43,
+                "confidence": 1,
+                "punctuated_word": "one"
+              },
+              {
+                "word": "looks",
+                "start": 60.43,
+                "end": 60.75,
+                "confidence": 1,
+                "punctuated_word": "looks"
+              },
+              {
+                "word": "good",
+                "start": 60.75,
+                "end": 61.25,
+                "confidence": 0.99902344,
+                "punctuated_word": "good."
+              },
+              {
+                "word": "yeah",
+                "start": 63.23,
+                "end": 63.73,
+                "confidence": 0.9519043,
+                "punctuated_word": "Yeah."
+              },
+              {
+                "word": "this",
+                "start": 64.99,
+                "end": 65.229996,
+                "confidence": 0.99609375,
+                "punctuated_word": "This"
+              },
+              {
+                "word": "one",
+                "start": 65.229996,
+                "end": 65.39,
+                "confidence": 1,
+                "punctuated_word": "one"
+              },
+              {
+                "word": "looks",
+                "start": 65.39,
+                "end": 65.685,
+                "confidence": 0.9980469,
+                "punctuated_word": "looks"
+              },
+              {
+                "word": "cozy",
+                "start": 66.005,
+                "end": 66.325,
+                "confidence": 0.9941406,
+                "punctuated_word": "cozy"
+              },
+              {
+                "word": "enough",
+                "start": 66.325,
+                "end": 66.825,
+                "confidence": 0.9975586,
+                "punctuated_word": "enough."
+              },
+              {
+                "word": "let's",
+                "start": 67.604996,
+                "end": 67.845,
+                "confidence": 0.9875488,
+                "punctuated_word": "Let's"
+              },
+              {
+                "word": "see",
+                "start": 67.845,
+                "end": 68.005,
+                "confidence": 0.99902344,
+                "punctuated_word": "see"
+              },
+              {
+                "word": "the",
+                "start": 68.005,
+                "end": 68.165,
+                "confidence": 0.97802734,
+                "punctuated_word": "the"
+              },
+              {
+                "word": "rating",
+                "start": 68.165,
+                "end": 68.665,
+                "confidence": 0.8222656,
+                "punctuated_word": "rating."
+              },
+              {
+                "word": "it",
+                "start": 68.725,
+                "end": 68.884995,
+                "confidence": 0.79003906,
+                "punctuated_word": "It"
+              },
+              {
+                "word": "is",
+                "start": 68.884995,
+                "end": 69.204994,
+                "confidence": 0.9716797,
+                "punctuated_word": "is"
+              },
+              {
+                "word": "a",
+                "start": 69.204994,
+                "end": 69.445,
+                "confidence": 0.9902344,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "four",
+                "start": 69.445,
+                "end": 69.685,
+                "confidence": 0.99902344,
+                "punctuated_word": "four"
+              },
+              {
+                "word": "point",
+                "start": 69.685,
+                "end": 69.924995,
+                "confidence": 1,
+                "punctuated_word": "point"
+              },
+              {
+                "word": "five",
+                "start": 69.924995,
+                "end": 70.165,
+                "confidence": 0.99902344,
+                "punctuated_word": "five"
+              },
+              {
+                "word": "rated",
+                "start": 70.165,
+                "end": 70.665,
+                "confidence": 0.8059082,
+                "punctuated_word": "rated,"
+              },
+              {
+                "word": "so",
+                "start": 71.204994,
+                "end": 71.445,
+                "confidence": 0.99609375,
+                "punctuated_word": "so"
+              },
+              {
+                "word": "i",
+                "start": 71.445,
+                "end": 71.604996,
+                "confidence": 0.99902344,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "think",
+                "start": 71.604996,
+                "end": 71.924995,
+                "confidence": 1,
+                "punctuated_word": "think"
+              },
+              {
+                "word": "they",
+                "start": 71.924995,
+                "end": 72.165,
+                "confidence": 0.6455078,
+                "punctuated_word": "they"
+              },
+              {
+                "word": "should",
+                "start": 72.165,
+                "end": 72.405,
+                "confidence": 1,
+                "punctuated_word": "should"
+              },
+              {
+                "word": "be",
+                "start": 72.405,
+                "end": 72.564995,
+                "confidence": 1,
+                "punctuated_word": "be"
+              },
+              {
+                "word": "good",
+                "start": 72.564995,
+                "end": 72.725,
+                "confidence": 1,
+                "punctuated_word": "good"
+              },
+              {
+                "word": "to",
+                "start": 72.725,
+                "end": 72.805,
+                "confidence": 1,
+                "punctuated_word": "to"
+              },
+              {
+                "word": "go",
+                "start": 72.805,
+                "end": 73.305,
+                "confidence": 0.9995117,
+                "punctuated_word": "go."
+              },
+              {
+                "word": "i",
+                "start": 73.365,
+                "end": 73.524994,
+                "confidence": 0.9970703,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "will",
+                "start": 73.524994,
+                "end": 73.685,
+                "confidence": 0.9892578,
+                "punctuated_word": "will"
+              },
+              {
+                "word": "hit",
+                "start": 73.685,
+                "end": 73.924995,
+                "confidence": 0.9941406,
+                "punctuated_word": "hit"
+              },
+              {
+                "word": "reserve",
+                "start": 73.924995,
+                "end": 74.424995,
+                "confidence": 0.9057617,
+                "punctuated_word": "reserve,"
+              },
+              {
+                "word": "and",
+                "start": 74.805,
+                "end": 75.305,
+                "confidence": 0.99902344,
+                "punctuated_word": "and"
+              },
+              {
+                "word": "i",
+                "start": 75.604996,
+                "end": 75.765,
+                "confidence": 0.9970703,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "will",
+                "start": 75.765,
+                "end": 76.005,
+                "confidence": 0.9580078,
+                "punctuated_word": "will"
+              },
+              {
+                "word": "enable",
+                "start": 76.005,
+                "end": 76.325,
+                "confidence": 0.38623047,
+                "punctuated_word": "enable"
+              },
+              {
+                "word": "to",
+                "start": 76.325,
+                "end": 76.485,
+                "confidence": 0.64404297,
+                "punctuated_word": "to"
+              },
+              {
+                "word": "go",
+                "start": 76.485,
+                "end": 76.985,
+                "confidence": 0.9941406,
+                "punctuated_word": "go."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "utterances": [
+      {
+        "start": 0.88,
+        "end": 2.82,
+        "confidence": 0.97139484,
+        "channel": 0,
+        "transcript": "So this is my product, Airbnb.",
+        "words": [
+          {
+            "word": "so",
+            "start": 0.88,
+            "end": 1.28,
+            "confidence": 0.9980469,
+            "punctuated_word": "So"
+          },
+          {
+            "word": "this",
+            "start": 1.28,
+            "end": 1.5999999,
+            "confidence": 0.9892578,
+            "punctuated_word": "this"
+          },
+          {
+            "word": "is",
+            "start": 1.5999999,
+            "end": 1.68,
+            "confidence": 0.9980469,
+            "punctuated_word": "is"
+          },
+          {
+            "word": "my",
+            "start": 1.68,
+            "end": 1.8399999,
+            "confidence": 0.9951172,
+            "punctuated_word": "my"
+          },
+          {
+            "word": "product",
+            "start": 1.8399999,
+            "end": 2.32,
+            "confidence": 0.88183594,
+            "punctuated_word": "product,"
+          },
+          {
+            "word": "airbnb",
+            "start": 2.32,
+            "end": 2.82,
+            "confidence": 0.96606445,
+            "punctuated_word": "Airbnb."
+          }
+        ],
+        "id": "cd104eb8-dce3-48b8-97f4-0b2ca5710635"
+      },
+      {
+        "start": 3.6,
+        "end": 5.38,
+        "confidence": 0.9420166,
+        "channel": 0,
+        "transcript": "You can, uh, book your stay,",
+        "words": [
+          {
+            "word": "you",
+            "start": 3.6,
+            "end": 3.76,
+            "confidence": 1,
+            "punctuated_word": "You"
+          },
+          {
+            "word": "can",
+            "start": 3.76,
+            "end": 4.08,
+            "confidence": 0.88964844,
+            "punctuated_word": "can,"
+          },
+          {
+            "word": "uh",
+            "start": 4.08,
+            "end": 4.3199997,
+            "confidence": 0.9980469,
+            "punctuated_word": "uh,"
+          },
+          {
+            "word": "book",
+            "start": 4.3199997,
+            "end": 4.48,
+            "confidence": 1,
+            "punctuated_word": "book"
+          },
+          {
+            "word": "your",
+            "start": 4.48,
+            "end": 4.88,
+            "confidence": 0.9951172,
+            "punctuated_word": "your"
+          },
+          {
+            "word": "stay",
+            "start": 4.88,
+            "end": 5.38,
+            "confidence": 0.7692871,
+            "punctuated_word": "stay,"
+          }
+        ],
+        "id": "6231e50f-2e59-44df-adc8-469294f851db"
+      },
+      {
+        "start": 6.16,
+        "end": 6.66,
+        "confidence": 0.8105469,
+        "channel": 0,
+        "transcript": "uh,",
+        "words": [
+          {
+            "word": "uh",
+            "start": 6.16,
+            "end": 6.66,
+            "confidence": 0.8105469,
+            "punctuated_word": "uh,"
+          }
+        ],
+        "id": "869ac5a6-33a4-4fe9-86a0-59321dbc7917"
+      },
+      {
+        "start": 7.52,
+        "end": 13.125,
+        "confidence": 0.9690116,
+        "channel": 0,
+        "transcript": "even before you, uh, take a flight or take a getaway to your destination.",
+        "words": [
+          {
+            "word": "even",
+            "start": 7.52,
+            "end": 7.8399997,
+            "confidence": 0.95410156,
+            "punctuated_word": "even"
+          },
+          {
+            "word": "before",
+            "start": 7.8399997,
+            "end": 8.34,
+            "confidence": 1,
+            "punctuated_word": "before"
+          },
+          {
+            "word": "you",
+            "start": 8.48,
+            "end": 8.98,
+            "confidence": 0.94506836,
+            "punctuated_word": "you,"
+          },
+          {
+            "word": "uh",
+            "start": 9.04,
+            "end": 9.28,
+            "confidence": 0.9995117,
+            "punctuated_word": "uh,"
+          },
+          {
+            "word": "take",
+            "start": 9.28,
+            "end": 9.5199995,
+            "confidence": 1,
+            "punctuated_word": "take"
+          },
+          {
+            "word": "a",
+            "start": 9.5199995,
+            "end": 9.679999,
+            "confidence": 0.99609375,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "flight",
+            "start": 9.679999,
+            "end": 10.08,
+            "confidence": 1,
+            "punctuated_word": "flight"
+          },
+          {
+            "word": "or",
+            "start": 10.08,
+            "end": 10.559999,
+            "confidence": 0.9863281,
+            "punctuated_word": "or"
+          },
+          {
+            "word": "take",
+            "start": 10.559999,
+            "end": 10.8,
+            "confidence": 0.9980469,
+            "punctuated_word": "take"
+          },
+          {
+            "word": "a",
+            "start": 10.8,
+            "end": 11.3,
+            "confidence": 0.8798828,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "getaway",
+            "start": 11.5199995,
+            "end": 12.0199995,
+            "confidence": 0.9584961,
+            "punctuated_word": "getaway"
+          },
+          {
+            "word": "to",
+            "start": 12.305,
+            "end": 12.385,
+            "confidence": 0.9873047,
+            "punctuated_word": "to"
+          },
+          {
+            "word": "your",
+            "start": 12.385,
+            "end": 12.625,
+            "confidence": 0.9472656,
+            "punctuated_word": "your"
+          },
+          {
+            "word": "destination",
+            "start": 12.625,
+            "end": 13.125,
+            "confidence": 0.9140625,
+            "punctuated_word": "destination."
+          }
+        ],
+        "id": "236c66a0-a54b-4eb6-8234-4cff67c2b8fc"
+      },
+      {
+        "start": 13.825001,
+        "end": 15.045,
+        "confidence": 0.9911296,
+        "channel": 0,
+        "transcript": "It's pretty simple.",
+        "words": [
+          {
+            "word": "it's",
+            "start": 13.825001,
+            "end": 14.305,
+            "confidence": 0.9807129,
+            "punctuated_word": "It's"
+          },
+          {
+            "word": "pretty",
+            "start": 14.305,
+            "end": 14.545,
+            "confidence": 0.9980469,
+            "punctuated_word": "pretty"
+          },
+          {
+            "word": "simple",
+            "start": 14.545,
+            "end": 15.045,
+            "confidence": 0.9946289,
+            "punctuated_word": "simple."
+          }
+        ],
+        "id": "a6c40cc2-f7bb-42ac-b348-9c5f255eb233"
+      },
+      {
+        "start": 15.505,
+        "end": 20.245,
+        "confidence": 0.96773,
+        "channel": 0,
+        "transcript": "Search where you want to go. Let's see. I want to go to cherry blossoms.",
+        "words": [
+          {
+            "word": "search",
+            "start": 15.505,
+            "end": 15.825001,
+            "confidence": 0.99902344,
+            "punctuated_word": "Search"
+          },
+          {
+            "word": "where",
+            "start": 15.825001,
+            "end": 16.065,
+            "confidence": 1,
+            "punctuated_word": "where"
+          },
+          {
+            "word": "you",
+            "start": 16.065,
+            "end": 16.225,
+            "confidence": 1,
+            "punctuated_word": "you"
+          },
+          {
+            "word": "want",
+            "start": 16.225,
+            "end": 16.385,
+            "confidence": 1,
+            "punctuated_word": "want"
+          },
+          {
+            "word": "to",
+            "start": 16.385,
+            "end": 16.545,
+            "confidence": 0.99902344,
+            "punctuated_word": "to"
+          },
+          {
+            "word": "go",
+            "start": 16.545,
+            "end": 17.045,
+            "confidence": 0.99853516,
+            "punctuated_word": "go."
+          },
+          {
+            "word": "let's",
+            "start": 17.265,
+            "end": 17.765,
+            "confidence": 0.9855957,
+            "punctuated_word": "Let's"
+          },
+          {
+            "word": "see",
+            "start": 17.905,
+            "end": 18.405,
+            "confidence": 0.80688477,
+            "punctuated_word": "see."
+          },
+          {
+            "word": "i",
+            "start": 18.545,
+            "end": 18.785,
+            "confidence": 0.9741211,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "want",
+            "start": 18.785,
+            "end": 19.025,
+            "confidence": 1,
+            "punctuated_word": "want"
+          },
+          {
+            "word": "to",
+            "start": 19.025,
+            "end": 19.105,
+            "confidence": 0.99902344,
+            "punctuated_word": "to"
+          },
+          {
+            "word": "go",
+            "start": 19.105,
+            "end": 19.265,
+            "confidence": 1,
+            "punctuated_word": "go"
+          },
+          {
+            "word": "to",
+            "start": 19.265,
+            "end": 19.505001,
+            "confidence": 0.99902344,
+            "punctuated_word": "to"
+          },
+          {
+            "word": "cherry",
+            "start": 19.505001,
+            "end": 19.745,
+            "confidence": 0.76123047,
+            "punctuated_word": "cherry"
+          },
+          {
+            "word": "blossoms",
+            "start": 19.745,
+            "end": 20.245,
+            "confidence": 0.99348956,
+            "punctuated_word": "blossoms."
+          }
+        ],
+        "id": "4cd45a67-12b9-4459-ad62-dc6af1bcc31a"
+      },
+      {
+        "start": 26.39,
+        "end": 27.13,
+        "confidence": 0.58776855,
+        "channel": 0,
+        "transcript": "K. So",
+        "words": [
+          {
+            "word": "k",
+            "start": 26.39,
+            "end": 26.63,
+            "confidence": 0.6184082,
+            "punctuated_word": "K."
+          },
+          {
+            "word": "so",
+            "start": 26.63,
+            "end": 27.13,
+            "confidence": 0.5571289,
+            "punctuated_word": "So"
+          }
+        ],
+        "id": "2292da89-4158-4772-b962-6d8b12cbf0eb"
+      },
+      {
+        "start": 28.71,
+        "end": 31.13,
+        "confidence": 0.99424523,
+        "channel": 0,
+        "transcript": "I'm flexible with the dates. I can",
+        "words": [
+          {
+            "word": "i'm",
+            "start": 28.71,
+            "end": 29.029999,
+            "confidence": 0.96899414,
+            "punctuated_word": "I'm"
+          },
+          {
+            "word": "flexible",
+            "start": 29.029999,
+            "end": 29.509998,
+            "confidence": 1,
+            "punctuated_word": "flexible"
+          },
+          {
+            "word": "with",
+            "start": 29.509998,
+            "end": 29.669998,
+            "confidence": 1,
+            "punctuated_word": "with"
+          },
+          {
+            "word": "the",
+            "start": 29.669998,
+            "end": 29.75,
+            "confidence": 0.9980469,
+            "punctuated_word": "the"
+          },
+          {
+            "word": "dates",
+            "start": 29.75,
+            "end": 30.25,
+            "confidence": 0.9926758,
+            "punctuated_word": "dates."
+          },
+          {
+            "word": "i",
+            "start": 30.47,
+            "end": 30.63,
+            "confidence": 1,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "can",
+            "start": 30.63,
+            "end": 31.13,
+            "confidence": 1,
+            "punctuated_word": "can"
+          }
+        ],
+        "id": "413f2881-a33f-4c81-96cd-1f4c89ebd095"
+      },
+      {
+        "start": 31.509998,
+        "end": 33.05,
+        "confidence": 0.975708,
+        "channel": 0,
+        "transcript": "go in March for",
+        "words": [
+          {
+            "word": "go",
+            "start": 31.509998,
+            "end": 31.83,
+            "confidence": 0.9921875,
+            "punctuated_word": "go"
+          },
+          {
+            "word": "in",
+            "start": 31.83,
+            "end": 31.99,
+            "confidence": 0.92822266,
+            "punctuated_word": "in"
+          },
+          {
+            "word": "march",
+            "start": 31.99,
+            "end": 32.489998,
+            "confidence": 0.99121094,
+            "punctuated_word": "March"
+          },
+          {
+            "word": "for",
+            "start": 32.55,
+            "end": 33.05,
+            "confidence": 0.99121094,
+            "punctuated_word": "for"
+          }
+        ],
+        "id": "3438f827-6baf-4bcf-884b-33af8af5b61e"
+      },
+      {
+        "start": 33.67,
+        "end": 34.41,
+        "confidence": 0.99609375,
+        "channel": 0,
+        "transcript": "a week.",
+        "words": [
+          {
+            "word": "a",
+            "start": 33.67,
+            "end": 33.91,
+            "confidence": 0.9951172,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "week",
+            "start": 33.91,
+            "end": 34.41,
+            "confidence": 0.9970703,
+            "punctuated_word": "week."
+          }
+        ],
+        "id": "4dbb2e07-d262-4c93-99a7-824b8bceef7b"
+      },
+      {
+        "start": 35.43,
+        "end": 37.129997,
+        "confidence": 0.85801476,
+        "channel": 0,
+        "transcript": "It will be just for single people,",
+        "words": [
+          {
+            "word": "it",
+            "start": 35.43,
+            "end": 35.59,
+            "confidence": 0.99609375,
+            "punctuated_word": "It"
+          },
+          {
+            "word": "will",
+            "start": 35.59,
+            "end": 35.75,
+            "confidence": 0.98535156,
+            "punctuated_word": "will"
+          },
+          {
+            "word": "be",
+            "start": 35.75,
+            "end": 35.91,
+            "confidence": 0.9838867,
+            "punctuated_word": "be"
+          },
+          {
+            "word": "just",
+            "start": 35.91,
+            "end": 36.149998,
+            "confidence": 0.4050293,
+            "punctuated_word": "just"
+          },
+          {
+            "word": "for",
+            "start": 36.149998,
+            "end": 36.309998,
+            "confidence": 0.9790039,
+            "punctuated_word": "for"
+          },
+          {
+            "word": "single",
+            "start": 36.309998,
+            "end": 36.629997,
+            "confidence": 0.8730469,
+            "punctuated_word": "single"
+          },
+          {
+            "word": "people",
+            "start": 36.629997,
+            "end": 37.129997,
+            "confidence": 0.7836914,
+            "punctuated_word": "people,"
+          }
+        ],
+        "id": "66738738-4e89-4c8d-9bc6-7d56aa49fb32"
+      },
+      {
+        "start": 37.535004,
+        "end": 38.355003,
+        "confidence": 0.9968262,
+        "channel": 0,
+        "transcript": "and I will hit",
+        "words": [
+          {
+            "word": "and",
+            "start": 37.535004,
+            "end": 37.615,
+            "confidence": 0.99902344,
+            "punctuated_word": "and"
+          },
+          {
+            "word": "i",
+            "start": 37.615,
+            "end": 37.695004,
+            "confidence": 0.99902344,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "will",
+            "start": 37.695004,
+            "end": 37.855003,
+            "confidence": 0.9980469,
+            "punctuated_word": "will"
+          },
+          {
+            "word": "hit",
+            "start": 37.855003,
+            "end": 38.355003,
+            "confidence": 0.99121094,
+            "punctuated_word": "hit"
+          }
+        ],
+        "id": "e354aa23-ad75-4c1b-9f12-68cc60a5c78f"
+      },
+      {
+        "start": 41.695,
+        "end": 44.115,
+        "confidence": 0.99554443,
+        "channel": 0,
+        "transcript": "search. It shows me, uh, the map where",
+        "words": [
+          {
+            "word": "search",
+            "start": 41.695,
+            "end": 41.855003,
+            "confidence": 0.99902344,
+            "punctuated_word": "search."
+          },
+          {
+            "word": "it",
+            "start": 41.855003,
+            "end": 42.095,
+            "confidence": 0.99609375,
+            "punctuated_word": "It"
+          },
+          {
+            "word": "shows",
+            "start": 42.095,
+            "end": 42.415,
+            "confidence": 1,
+            "punctuated_word": "shows"
+          },
+          {
+            "word": "me",
+            "start": 42.415,
+            "end": 42.895,
+            "confidence": 0.9975586,
+            "punctuated_word": "me,"
+          },
+          {
+            "word": "uh",
+            "start": 42.895,
+            "end": 43.135002,
+            "confidence": 1,
+            "punctuated_word": "uh,"
+          },
+          {
+            "word": "the",
+            "start": 43.135002,
+            "end": 43.375,
+            "confidence": 1,
+            "punctuated_word": "the"
+          },
+          {
+            "word": "map",
+            "start": 43.375,
+            "end": 43.615,
+            "confidence": 0.99902344,
+            "punctuated_word": "map"
+          },
+          {
+            "word": "where",
+            "start": 43.615,
+            "end": 44.115,
+            "confidence": 0.97265625,
+            "punctuated_word": "where"
+          }
+        ],
+        "id": "73b624e0-ab36-4e55-82c3-d6b6fcbc9470"
+      },
+      {
+        "start": 44.575,
+        "end": 48.035004,
+        "confidence": 0.92681885,
+        "channel": 0,
+        "transcript": "the the residents are there as well as",
+        "words": [
+          {
+            "word": "the",
+            "start": 44.575,
+            "end": 45.075,
+            "confidence": 0.9980469,
+            "punctuated_word": "the"
+          },
+          {
+            "word": "the",
+            "start": 45.375,
+            "end": 45.535004,
+            "confidence": 0.78515625,
+            "punctuated_word": "the"
+          },
+          {
+            "word": "residents",
+            "start": 45.535004,
+            "end": 46.035004,
+            "confidence": 0.796875,
+            "punctuated_word": "residents"
+          },
+          {
+            "word": "are",
+            "start": 46.175003,
+            "end": 46.335003,
+            "confidence": 1,
+            "punctuated_word": "are"
+          },
+          {
+            "word": "there",
+            "start": 46.335003,
+            "end": 46.835003,
+            "confidence": 1,
+            "punctuated_word": "there"
+          },
+          {
+            "word": "as",
+            "start": 47.135002,
+            "end": 47.295002,
+            "confidence": 0.8354492,
+            "punctuated_word": "as"
+          },
+          {
+            "word": "well",
+            "start": 47.295002,
+            "end": 47.535004,
+            "confidence": 1,
+            "punctuated_word": "well"
+          },
+          {
+            "word": "as",
+            "start": 47.535004,
+            "end": 48.035004,
+            "confidence": 0.99902344,
+            "punctuated_word": "as"
+          }
+        ],
+        "id": "9fcd98a7-b727-45d2-b055-698b0370f961"
+      },
+      {
+        "start": 49.055,
+        "end": 53.49,
+        "confidence": 0.9756235,
+        "channel": 0,
+        "transcript": "the prices over it. I can just hover and see whatever are there.",
+        "words": [
+          {
+            "word": "the",
+            "start": 49.055,
+            "end": 49.295002,
+            "confidence": 0.8691406,
+            "punctuated_word": "the"
+          },
+          {
+            "word": "prices",
+            "start": 49.295002,
+            "end": 49.695,
+            "confidence": 0.9291992,
+            "punctuated_word": "prices"
+          },
+          {
+            "word": "over",
+            "start": 49.695,
+            "end": 49.935,
+            "confidence": 0.96875,
+            "punctuated_word": "over"
+          },
+          {
+            "word": "it",
+            "start": 49.935,
+            "end": 50.43,
+            "confidence": 0.9946289,
+            "punctuated_word": "it."
+          },
+          {
+            "word": "i",
+            "start": 50.43,
+            "end": 50.510002,
+            "confidence": 1,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "can",
+            "start": 50.510002,
+            "end": 50.75,
+            "confidence": 0.99902344,
+            "punctuated_word": "can"
+          },
+          {
+            "word": "just",
+            "start": 50.75,
+            "end": 51.15,
+            "confidence": 0.9941406,
+            "punctuated_word": "just"
+          },
+          {
+            "word": "hover",
+            "start": 51.15,
+            "end": 51.55,
+            "confidence": 0.95703125,
+            "punctuated_word": "hover"
+          },
+          {
+            "word": "and",
+            "start": 51.55,
+            "end": 51.949997,
+            "confidence": 0.9951172,
+            "punctuated_word": "and"
+          },
+          {
+            "word": "see",
+            "start": 51.949997,
+            "end": 52.35,
+            "confidence": 1,
+            "punctuated_word": "see"
+          },
+          {
+            "word": "whatever",
+            "start": 52.35,
+            "end": 52.67,
+            "confidence": 0.9970703,
+            "punctuated_word": "whatever"
+          },
+          {
+            "word": "are",
+            "start": 52.67,
+            "end": 52.99,
+            "confidence": 0.97998047,
+            "punctuated_word": "are"
+          },
+          {
+            "word": "there",
+            "start": 52.99,
+            "end": 53.49,
+            "confidence": 0.99902344,
+            "punctuated_word": "there."
+          }
+        ],
+        "id": "477e9734-59ed-49c7-8b73-730ab6a17221"
+      },
+      {
+        "start": 60.03,
+        "end": 61.25,
+        "confidence": 0.9906006,
+        "channel": 0,
+        "transcript": "This one looks good.",
+        "words": [
+          {
+            "word": "this",
+            "start": 60.03,
+            "end": 60.190002,
+            "confidence": 0.9633789,
+            "punctuated_word": "This"
+          },
+          {
+            "word": "one",
+            "start": 60.190002,
+            "end": 60.43,
+            "confidence": 1,
+            "punctuated_word": "one"
+          },
+          {
+            "word": "looks",
+            "start": 60.43,
+            "end": 60.75,
+            "confidence": 1,
+            "punctuated_word": "looks"
+          },
+          {
+            "word": "good",
+            "start": 60.75,
+            "end": 61.25,
+            "confidence": 0.99902344,
+            "punctuated_word": "good."
+          }
+        ],
+        "id": "d1a132dd-7f71-466e-a343-0c4b2bd329b7"
+      },
+      {
+        "start": 63.23,
+        "end": 63.73,
+        "confidence": 0.9519043,
+        "channel": 0,
+        "transcript": "Yeah.",
+        "words": [
+          {
+            "word": "yeah",
+            "start": 63.23,
+            "end": 63.73,
+            "confidence": 0.9519043,
+            "punctuated_word": "Yeah."
+          }
+        ],
+        "id": "4610f415-79f0-47e6-bacd-cb4294dd4897"
+      },
+      {
+        "start": 64.99,
+        "end": 66.825,
+        "confidence": 0.99716794,
+        "channel": 0,
+        "transcript": "This one looks cozy enough.",
+        "words": [
+          {
+            "word": "this",
+            "start": 64.99,
+            "end": 65.229996,
+            "confidence": 0.99609375,
+            "punctuated_word": "This"
+          },
+          {
+            "word": "one",
+            "start": 65.229996,
+            "end": 65.39,
+            "confidence": 1,
+            "punctuated_word": "one"
+          },
+          {
+            "word": "looks",
+            "start": 65.39,
+            "end": 65.685,
+            "confidence": 0.9980469,
+            "punctuated_word": "looks"
+          },
+          {
+            "word": "cozy",
+            "start": 66.005,
+            "end": 66.325,
+            "confidence": 0.9941406,
+            "punctuated_word": "cozy"
+          },
+          {
+            "word": "enough",
+            "start": 66.325,
+            "end": 66.825,
+            "confidence": 0.9975586,
+            "punctuated_word": "enough."
+          }
+        ],
+        "id": "7f9b4cbb-63fb-407e-ac68-f490974efddc"
+      },
+      {
+        "start": 67.604996,
+        "end": 70.665,
+        "confidence": 0.9402521,
+        "channel": 0,
+        "transcript": "Let's see the rating. It is a four point five rated,",
+        "words": [
+          {
+            "word": "let's",
+            "start": 67.604996,
+            "end": 67.845,
+            "confidence": 0.9875488,
+            "punctuated_word": "Let's"
+          },
+          {
+            "word": "see",
+            "start": 67.845,
+            "end": 68.005,
+            "confidence": 0.99902344,
+            "punctuated_word": "see"
+          },
+          {
+            "word": "the",
+            "start": 68.005,
+            "end": 68.165,
+            "confidence": 0.97802734,
+            "punctuated_word": "the"
+          },
+          {
+            "word": "rating",
+            "start": 68.165,
+            "end": 68.665,
+            "confidence": 0.8222656,
+            "punctuated_word": "rating."
+          },
+          {
+            "word": "it",
+            "start": 68.725,
+            "end": 68.884995,
+            "confidence": 0.79003906,
+            "punctuated_word": "It"
+          },
+          {
+            "word": "is",
+            "start": 68.884995,
+            "end": 69.204994,
+            "confidence": 0.9716797,
+            "punctuated_word": "is"
+          },
+          {
+            "word": "a",
+            "start": 69.204994,
+            "end": 69.445,
+            "confidence": 0.9902344,
+            "punctuated_word": "a"
+          },
+          {
+            "word": "four",
+            "start": 69.445,
+            "end": 69.685,
+            "confidence": 0.99902344,
+            "punctuated_word": "four"
+          },
+          {
+            "word": "point",
+            "start": 69.685,
+            "end": 69.924995,
+            "confidence": 1,
+            "punctuated_word": "point"
+          },
+          {
+            "word": "five",
+            "start": 69.924995,
+            "end": 70.165,
+            "confidence": 0.99902344,
+            "punctuated_word": "five"
+          },
+          {
+            "word": "rated",
+            "start": 70.165,
+            "end": 70.665,
+            "confidence": 0.8059082,
+            "punctuated_word": "rated,"
+          }
+        ],
+        "id": "d96e52b9-b7e3-49c9-bf7f-0eb6fd8c60c4"
+      },
+      {
+        "start": 71.204994,
+        "end": 74.424995,
+        "confidence": 0.9635667,
+        "channel": 0,
+        "transcript": "so I think they should be good to go. I will hit reserve,",
+        "words": [
+          {
+            "word": "so",
+            "start": 71.204994,
+            "end": 71.445,
+            "confidence": 0.99609375,
+            "punctuated_word": "so"
+          },
+          {
+            "word": "i",
+            "start": 71.445,
+            "end": 71.604996,
+            "confidence": 0.99902344,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "think",
+            "start": 71.604996,
+            "end": 71.924995,
+            "confidence": 1,
+            "punctuated_word": "think"
+          },
+          {
+            "word": "they",
+            "start": 71.924995,
+            "end": 72.165,
+            "confidence": 0.6455078,
+            "punctuated_word": "they"
+          },
+          {
+            "word": "should",
+            "start": 72.165,
+            "end": 72.405,
+            "confidence": 1,
+            "punctuated_word": "should"
+          },
+          {
+            "word": "be",
+            "start": 72.405,
+            "end": 72.564995,
+            "confidence": 1,
+            "punctuated_word": "be"
+          },
+          {
+            "word": "good",
+            "start": 72.564995,
+            "end": 72.725,
+            "confidence": 1,
+            "punctuated_word": "good"
+          },
+          {
+            "word": "to",
+            "start": 72.725,
+            "end": 72.805,
+            "confidence": 1,
+            "punctuated_word": "to"
+          },
+          {
+            "word": "go",
+            "start": 72.805,
+            "end": 73.305,
+            "confidence": 0.9995117,
+            "punctuated_word": "go."
+          },
+          {
+            "word": "i",
+            "start": 73.365,
+            "end": 73.524994,
+            "confidence": 0.9970703,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "will",
+            "start": 73.524994,
+            "end": 73.685,
+            "confidence": 0.9892578,
+            "punctuated_word": "will"
+          },
+          {
+            "word": "hit",
+            "start": 73.685,
+            "end": 73.924995,
+            "confidence": 0.9941406,
+            "punctuated_word": "hit"
+          },
+          {
+            "word": "reserve",
+            "start": 73.924995,
+            "end": 74.424995,
+            "confidence": 0.9057617,
+            "punctuated_word": "reserve,"
+          }
+        ],
+        "id": "0a408c00-b5ec-4156-8a18-e1335b0c34f1"
+      },
+      {
+        "start": 74.805,
+        "end": 76.985,
+        "confidence": 0.8297526,
+        "channel": 0,
+        "transcript": "and I will enable to go.",
+        "words": [
+          {
+            "word": "and",
+            "start": 74.805,
+            "end": 75.305,
+            "confidence": 0.99902344,
+            "punctuated_word": "and"
+          },
+          {
+            "word": "i",
+            "start": 75.604996,
+            "end": 75.765,
+            "confidence": 0.9970703,
+            "punctuated_word": "I"
+          },
+          {
+            "word": "will",
+            "start": 75.765,
+            "end": 76.005,
+            "confidence": 0.9580078,
+            "punctuated_word": "will"
+          },
+          {
+            "word": "enable",
+            "start": 76.005,
+            "end": 76.325,
+            "confidence": 0.38623047,
+            "punctuated_word": "enable"
+          },
+          {
+            "word": "to",
+            "start": 76.325,
+            "end": 76.485,
+            "confidence": 0.64404297,
+            "punctuated_word": "to"
+          },
+          {
+            "word": "go",
+            "start": 76.485,
+            "end": 76.985,
+            "confidence": 0.9941406,
+            "punctuated_word": "go."
+          }
+        ],
+        "id": "fad57a1f-a877-414e-958b-3baaf9a33e58"
+      }
+    ]
+  }
+}

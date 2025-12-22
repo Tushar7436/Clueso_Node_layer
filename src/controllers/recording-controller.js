@@ -76,7 +76,7 @@ exports.transcribeAudio = async (audioPath, sessionId, metadata) => {
     }
 
     Logger.info(`[Recording Controller] Processing audio file: ${audioPath}`);
-    const transcription = await DeepgramService.transcribeFile(audioPath);
+    const transcription = await DeepgramService.transcribeFile(audioPath, sessionId);
 
     const transcribedText = transcription.text;
     const deepgramFullResponse = transcription; // Full response (text, timeline, metadata, raw)
@@ -85,6 +85,10 @@ exports.transcribeAudio = async (audioPath, sessionId, metadata) => {
     Logger.info(`[Recording Controller] Text: "${transcribedText}"`);
     Logger.info(`[Recording Controller] Timeline segments: ${transcription.timeline?.length || 0}`);
     Logger.info(`[Recording Controller] Metadata: ${JSON.stringify(transcription.metadata)}`);
+
+    // ✅ NEW: Set Deepgram completion status
+    recordingService.setDeepgramStatus(sessionId, true, transcribedText, deepgramFullResponse);
+    Logger.info(`[Recording Controller] ✅ Deepgram transcription completed for session: ${sessionId}`);
 
     // Broadcast raw audio to frontend (always send raw audio after transcription)
     const frontendService = require("../services/frontend-service");
@@ -101,6 +105,9 @@ exports.transcribeAudio = async (audioPath, sessionId, metadata) => {
     };
   } catch (deepgramError) {
     Logger.error(`[Recording Controller] Error processing audio with Deepgram: ${deepgramError}`);
+
+    // ✅ NEW: Set Deepgram failure status
+    recordingService.setDeepgramStatus(sessionId, true, '', null);
 
     // Notify frontend of transcription failure
     const frontendService = require("../services/frontend-service");
@@ -121,6 +128,61 @@ exports.transcribeAudio = async (audioPath, sessionId, metadata) => {
     }
 
     return null;
+  }
+};
+
+/**
+ * Store DOM events incrementally (called multiple times during recording)
+ * Extension sends events in batches (e.g., 5 events at a time)
+ */
+exports.storeDomEvents = async (req, res) => {
+  try {
+    const { sessionId, events, metadata } = req.body;
+
+    if (!sessionId) {
+      return res.status(400).json({
+        success: false,
+        error: "sessionId is required"
+      });
+    }
+
+    if (!events || !Array.isArray(events)) {
+      return res.status(400).json({
+        success: false,
+        error: "events array is required"
+      });
+    }
+
+    Logger.info(`[Recording Controller] 📥 Receiving ${events.length} DOM events for session: ${sessionId}`);
+
+    // Append events to storage (incremental)
+    const stored = recordingService.appendDomEvents(sessionId, events, metadata || {});
+
+    if (!stored) {
+      return res.status(500).json({
+        success: false,
+        error: "Failed to store DOM events"
+      });
+    }
+
+    const totalEvents = recordingService.getEventsForSession(sessionId).length;
+
+    Logger.info(`[Recording Controller] ✅ Stored ${events.length} events (Total: ${totalEvents})`);
+
+    return res.status(200).json({
+      success: true,
+      sessionId,
+      eventsReceived: events.length,
+      totalEvents,
+      message: "DOM events stored successfully"
+    });
+  } catch (err) {
+    Logger.error("[Recording Controller] Error storing DOM events:", err);
+    return res.status(500).json({
+      success: false,
+      error: "Failed to store DOM events",
+      message: err.message
+    });
   }
 };
 
@@ -235,3 +297,247 @@ exports.processRecording = async (req, res) => {
     });
   }
 };
+
+/**
+ * Finalize recording - NEW endpoint that replaces /process-recording
+ * Called by extension after all chunks and events are sent
+ * Waits for Deepgram completion, then sends to Python
+ */
+exports.finalizeRecording = async (req, res) => {
+  try {
+    const { sessionId } = req.body;
+
+    // Validate sessionId
+    if (!sessionId) {
+      return res.status(400).json({
+        success: false,
+        error: "sessionId is required"
+      });
+    }
+
+    Logger.info(`[Recording Controller] 🏁 FINALIZE called for session: ${sessionId}`);
+
+    // Step 1: Retrieve stored DOM events and metadata
+    const events = recordingService.getEventsForSession(sessionId);
+    const storedMetadata = recordingService.getMetadataForSession(sessionId);
+
+    Logger.info(`[Recording Controller] 📦 Retrieved ${events.length} stored DOM events`);
+
+    if (events.length === 0) {
+      Logger.warn(`[Recording Controller] ⚠️ No DOM events found for session: ${sessionId}`);
+    }
+
+    // ✅ Extract metadata from events if not provided by extension
+    const enrichedMetadata = {
+      sessionId: sessionId,
+      ...storedMetadata,
+      // Extract from first event if not in stored metadata
+      url: storedMetadata.url || (events[0]?.url) || (events[0]?.metadata?.url) || "unknown",
+      viewport: storedMetadata.viewport || (events[0]?.viewport) || (events[0]?.metadata?.viewport) || { width: 1920, height: 1080 },
+      startTime: storedMetadata.startTime || (events[0]?.timestamp),
+      endTime: storedMetadata.endTime || (events[events.length - 1]?.timestamp),
+    };
+
+    Logger.info(`[Recording Controller] 📋 Enriched Metadata:`, JSON.stringify(enrichedMetadata));
+
+    // Step 2: Finalize audio/video streams to get file paths
+    Logger.info(`[Recording Controller] 📁 Finalizing audio/video streams...`);
+
+    const result = await recordingService.processRecording({
+      events,
+      metadata: enrichedMetadata,
+      videoPath: null, // Will be retrieved from activeStreams
+      audioPath: null
+    });
+
+    const permanentAudioPath = result.audioPath;
+    const permanentVideoPath = result.videoPath;
+
+    Logger.info(`[Recording Controller] 📁 Audio path: ${permanentAudioPath}`);
+    Logger.info(`[Recording Controller] 📁 Video path: ${permanentVideoPath}`);
+
+    // Step 3: Trigger Deepgram transcription (if audio exists)
+    if (permanentAudioPath && fs.existsSync(permanentAudioPath)) {
+      Logger.info(`[Recording Controller] 🎤 Starting Deepgram transcription...`);
+
+      // Trigger transcription (this will set Deepgram status when complete)
+      const transcriptionPromise = exports.transcribeAudio(
+        permanentAudioPath,
+        sessionId,
+        enrichedMetadata
+      );
+
+      // Wait for Deepgram to complete
+      Logger.info(`[Recording Controller] ⏳ Waiting for Deepgram transcription to complete...`);
+
+      let deepgramStatus;
+      try {
+        // Wait for transcription to finish
+        await transcriptionPromise;
+
+        // Get the status that was set by transcribeAudio
+        deepgramStatus = recordingService.getDeepgramStatus(sessionId);
+
+        if (!deepgramStatus || !deepgramStatus.completed) {
+          throw new Error('Deepgram status not set after transcription');
+        }
+
+        Logger.info(`[Recording Controller] ✅ Deepgram transcription completed`);
+      } catch (deepgramError) {
+        Logger.error(`[Recording Controller] ❌ Deepgram transcription failed:`, deepgramError);
+
+        // Try to get partial status
+        deepgramStatus = recordingService.getDeepgramStatus(sessionId);
+
+        if (!deepgramStatus || !deepgramStatus.text) {
+          // No transcription available, use DOM events fallback
+          Logger.warn(`[Recording Controller] ⚠️ No transcription available, using DOM events fallback`);
+
+          try {
+            const frontendService = require("../services/frontend-service");
+            frontendService.sendDomEventsAsFallback(sessionId);
+          } catch (fallbackError) {
+            Logger.error(`[Recording Controller] Error sending fallback:`, fallbackError);
+          }
+
+          return res.status(500).json({
+            success: false,
+            error: "Deepgram transcription failed",
+            message: deepgramError.message,
+            fallbackSent: true
+          });
+        }
+
+        Logger.warn(`[Recording Controller] ⚠️ Using partial Deepgram result`);
+      }
+
+      const transcribedText = deepgramStatus.text;
+      const deepgramResponse = deepgramStatus.deepgramResponse;
+
+      // Log the transcribed text
+      Logger.info(`[Recording Controller] 📝 Transcribed Text (${transcribedText.length} chars):`);
+      Logger.info(`[Recording Controller] "${transcribedText}"`);
+
+      // Step 4: Broadcast video to frontend
+      try {
+        if (permanentVideoPath) {
+          const frontendService = require("../services/frontend-service");
+          frontendService.sendVideo(sessionId, {
+            filename: path.basename(permanentVideoPath),
+            path: `/recordings/${path.basename(permanentVideoPath)}`,
+            metadata: enrichedMetadata,
+            timestamp: new Date().toISOString()
+          });
+          Logger.info(`[Recording Controller] ✅ Video broadcasted to frontend`);
+        }
+      } catch (broadcastError) {
+        Logger.error(`[Recording Controller] Error broadcasting video:`, broadcastError);
+      }
+
+      // Step 5: Send to Python AI with complete data
+      Logger.info(`[Recording Controller] 🤖 Sending to Python AI...`);
+      Logger.info(`[Recording Controller] 📊 Data being sent to Python:`);
+      Logger.info(`[Recording Controller]    - Text: "${transcribedText.substring(0, 100)}..." (${transcribedText.length} chars)`);
+      Logger.info(`[Recording Controller]    - Events: ${events.length} events`);
+      Logger.info(`[Recording Controller]    - Deepgram Response: ${deepgramResponse ? 'YES' : 'NO'}`);
+      Logger.info(`[Recording Controller]    - Audio Path: ${permanentAudioPath}`);
+      Logger.info(`[Recording Controller]    - Metadata:`, JSON.stringify(enrichedMetadata));
+
+      let pythonResponse = null;
+      if (transcribedText && transcribedText.length > 0) {
+        pythonResponse = await pythonController.processWithAI(
+          transcribedText,
+          events,
+          enrichedMetadata,  // ← Use enriched metadata
+          deepgramResponse,
+          sessionId,
+          permanentAudioPath
+        );
+
+        if (pythonResponse) {
+          Logger.info(`[Recording Controller] ✅ Python AI processing completed successfully`);
+        } else {
+          Logger.warn(`[Recording Controller] ⚠️ Python AI processing returned null`);
+
+          // Trigger fallback to DOM events
+          try {
+            const frontendService = require("../services/frontend-service");
+            frontendService.sendDomEventsAsFallback(sessionId);
+            Logger.info(`[Recording Controller] 📤 Sent DOM events as fallback to frontend`);
+          } catch (fallbackError) {
+            Logger.error(`[Recording Controller] Error sending fallback:`, fallbackError);
+          }
+        }
+      } else {
+        Logger.warn(`[Recording Controller] ⚠️ No transcribed text available, using DOM events fallback`);
+
+        try {
+          const frontendService = require("../services/frontend-service");
+          frontendService.sendDomEventsAsFallback(sessionId);
+        } catch (fallbackError) {
+          Logger.error(`[Recording Controller] Error sending fallback:`, fallbackError);
+        }
+      }
+
+      // Step 6: Clean up session data
+      recordingService.clearSessionData(sessionId);
+      Logger.info(`[Recording Controller] 🧹 Cleaned up session data for: ${sessionId}`);
+
+      // Step 7: Return success response
+      return res.status(200).json({
+        success: true,
+        sessionId,
+        message: "Recording finalized and processed successfully",
+        transcription: {
+          text: transcribedText,
+          textLength: transcribedText.length,
+          hasDeepgramResponse: !!deepgramResponse
+        },
+        events: {
+          count: events.length
+        },
+        python: {
+          processed: !!pythonResponse,
+          response: pythonResponse
+        },
+        files: {
+          audio: permanentAudioPath,
+          video: permanentVideoPath
+        }
+      });
+    } else {
+      // No audio file, use DOM events fallback
+      Logger.warn(`[Recording Controller] ⚠️ No audio file found, using DOM events fallback`);
+
+      try {
+        const frontendService = require("../services/frontend-service");
+        frontendService.sendDomEventsAsFallback(sessionId);
+      } catch (fallbackError) {
+        Logger.error(`[Recording Controller] Error sending fallback:`, fallbackError);
+      }
+
+      return res.status(200).json({
+        success: true,
+        sessionId,
+        message: "Recording finalized without transcription (no audio)",
+        events: {
+          count: events.length
+        },
+        files: {
+          audio: null,
+          video: permanentVideoPath
+        },
+        fallbackSent: true
+      });
+    }
+
+  } catch (err) {
+    Logger.error("[Recording Controller] ❌ Finalize recording error:", err);
+    return res.status(500).json({
+      success: false,
+      error: "Failed to finalize recording",
+      message: err.message
+    });
+  }
+};
+

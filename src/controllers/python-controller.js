@@ -32,10 +32,9 @@ exports.processWithAI = async (text, events = [], metadata = {}, deepgramRespons
 
         // Send to Python service
         const pythonResponse = await PythonService.sendTextWithDomEvents(
-            text,
+            deepgramResponse?.raw || deepgramResponse, // Pass raw Deepgram JSON
             events,
-            metadata,
-            deepgramResponse // Pass full Deepgram JSON response (can be null for chat)
+            metadata
         );
 
         Logger.info(`[Python Controller] Successfully received response from Python layer`);
@@ -45,58 +44,55 @@ exports.processWithAI = async (text, events = [], metadata = {}, deepgramRespons
         if (sessionId) {
             const frontendService = require("../services/frontend-service");
 
-            // Broadcast instructions if Python returned them
-            if (pythonResponse && pythonResponse.instructions && Array.isArray(pythonResponse.instructions) && pythonResponse.instructions.length > 0) {
+            // 1. Broadcast instructions (standard actions)
+            if (pythonResponse && pythonResponse.instructions && Array.isArray(pythonResponse.instructions)) {
                 Logger.info(`[Python Controller] Broadcasting ${pythonResponse.instructions.length} instructions to frontend`);
-                pythonResponse.instructions.forEach((instruction, index) => {
+                pythonResponse.instructions.forEach((instruction) => {
                     frontendService.sendInstructions(sessionId, instruction, 'python');
-                    Logger.info(`[Python Controller] Sent instruction ${index + 1}/${pythonResponse.instructions.length}`);
                 });
-            } else {
+            } else if (!pythonResponse?.instructions && events && events.length > 0) {
                 // Fallback: Send DOM events as instructions if Python didn't return any
                 Logger.info(`[Python Controller] No instructions from Python, using DOM events as fallback`);
-                if (events && Array.isArray(events) && events.length > 0) {
-                    Logger.info(`[Python Controller] Broadcasting ${events.length} DOM events as instructions to frontend`);
-                    events.forEach((event, index) => {
-                        frontendService.sendInstructions(sessionId, event, 'dom');
-                        Logger.info(`[Python Controller] Sent DOM event ${index + 1}/${events.length} as instruction`);
-                    });
-                } else {
-                    Logger.warn(`[Python Controller] No instructions from Python and no DOM events available`);
-                }
+                events.forEach((event) => {
+                    frontendService.sendInstructions(sessionId, event, 'dom');
+                });
             }
 
-            // Handle processed audio if Python returned it
-            if (pythonResponse && pythonResponse.processed_audio_filename) {
-                const processedAudioPath = path.join(
-                    __dirname,
-                    '../../recordings',
-                    pythonResponse.processed_audio_filename
-                );
+            // 2. Broadcast displayEffects (new)
+            if (pythonResponse && pythonResponse.displayEffects && Array.isArray(pythonResponse.displayEffects)) {
+                Logger.info(`[Python Controller] Broadcasting ${pythonResponse.displayEffects.length} displayEffects to frontend`);
+                pythonResponse.displayEffects.forEach((effect) => {
+                    frontendService.sendInstructions(sessionId, { type: 'displayEffect', ...effect }, 'python');
+                });
+            }
 
-                Logger.info(`[Python Controller] Checking for processed audio at: ${processedAudioPath}`);
+            // 3. Broadcast narrations (new)
+            if (pythonResponse && pythonResponse.narrations && Array.isArray(pythonResponse.narrations)) {
+                Logger.info(`[Python Controller] Broadcasting narrations to frontend`);
+                frontendService.sendInstructions(sessionId, { type: 'narrations', data: pythonResponse.narrations }, 'python');
+            }
 
-                // Verify the processed audio file exists
-                if (fs.existsSync(processedAudioPath)) {
-                    Logger.info(`[Python Controller] Found processed audio, broadcasting to frontend session: ${sessionId}`);
-                    frontendService.sendAudio(sessionId, {
-                        filename: pythonResponse.processed_audio_filename,
-                        path: `/recordings/${pythonResponse.processed_audio_filename}`,
-                        text: text,
-                        timestamp: new Date().toISOString()
-                    });
-                } else {
-                    Logger.warn(`[Python Controller] Processed audio file not found at ${processedAudioPath}`);
-                    // If we have raw audio path, send it as fallback
-                    if (audioPath && fs.existsSync(audioPath)) {
-                        frontendService.sendAudio(sessionId, {
-                            filename: path.basename(audioPath),
-                            path: `/recordings/${path.basename(audioPath)}`,
-                            text: text,
-                            timestamp: new Date().toISOString()
-                        });
-                    }
-                }
+            // 4. Handle processed audio (audioFile)
+            if (pythonResponse && pythonResponse.audioFile) {
+                const audioPath = pythonResponse.audioFile.startsWith('/') ? pythonResponse.audioFile : `/${pythonResponse.audioFile}`;
+                const audioUrl = `${PythonService.pythonBaseUrl}${audioPath}`;
+                Logger.info(`[Python Controller] Broadcasting audio from Python: ${audioUrl}`);
+
+                frontendService.sendAudio(sessionId, {
+                    filename: pythonResponse.audioFile,
+                    path: audioUrl,
+                    text: text,
+                    timestamp: new Date().toISOString()
+                });
+            } else if (audioPath && fs.existsSync(audioPath)) {
+                // Fallback to raw audio if Python didn't return one
+                Logger.info(`[Python Controller] Using raw audio as fallback`);
+                frontendService.sendAudio(sessionId, {
+                    filename: path.basename(audioPath),
+                    path: `/recordings/${path.basename(audioPath)}`,
+                    text: text,
+                    timestamp: new Date().toISOString()
+                });
             }
         }
 

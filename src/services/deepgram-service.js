@@ -1,5 +1,6 @@
 const { createClient } = require('@deepgram/sdk');
 const fs = require('fs');
+const path = require('path');
 const { Logger } = require('../config');
 
 class DeepgramService {
@@ -19,7 +20,7 @@ class DeepgramService {
   /**
    * Transcribe from file path
    */
-  async transcribeFile(audioPath, userOptions = {}) {
+  async transcribeFile(audioPath, sessionId = null, userOptions = {}) {
     try {
       if (!this.client) throw new Error('Deepgram not configured');
 
@@ -39,7 +40,7 @@ class DeepgramService {
 
       Logger.info('[Deepgram] File transcription complete');
 
-      return this._formatResult(result);
+      return this._formatResult(result, sessionId);
     } catch (err) {
       Logger.error('[Deepgram] File transcription failed:', err);
       throw err;
@@ -49,7 +50,7 @@ class DeepgramService {
   /**
    * Transcribe from Buffer
    */
-  async transcribeBuffer(audioBuffer, userOptions = {}) {
+  async transcribeBuffer(audioBuffer, sessionId = null, userOptions = {}) {
     try {
       if (!this.client) throw new Error('Deepgram not configured');
 
@@ -68,7 +69,7 @@ class DeepgramService {
 
       Logger.info('[Deepgram] Buffer transcription complete');
 
-      return this._formatResult(result);
+      return this._formatResult(result, sessionId);
     } catch (err) {
       Logger.error('[Deepgram] Buffer transcription failed:', err);
       throw err;
@@ -98,8 +99,11 @@ class DeepgramService {
   /**
    * Build clean result object
    */
-  _formatResult(result) {
+  _formatResult(result, sessionId = null) {
     Logger.info('[Deepgram] Formatting result');
+
+    // Save full JSON to file
+    this._saveResponseToFile(result, sessionId);
 
     const utterances = result?.results?.utterances || [];
 
@@ -137,6 +141,29 @@ class DeepgramService {
       mp4: 'audio/mp4',
     };
     return map[ext] || 'audio/webm';
+  }
+
+  /**
+   * Save Deepgram response to a JSON file
+   */
+  _saveResponseToFile(result, sessionId) {
+    try {
+      const logsDir = path.join(process.cwd(), 'deepgram_sessions');
+      if (!fs.existsSync(logsDir)) {
+        fs.mkdirSync(logsDir, { recursive: true });
+      }
+
+      const fileName = sessionId
+        ? `deepgram_${sessionId}.json`
+        : `deepgram_${Date.now()}.json`;
+
+      const filePath = path.join(logsDir, fileName);
+
+      fs.writeFileSync(filePath, JSON.stringify(result, null, 2));
+      Logger.info(`[Deepgram] Saved full response to: ${filePath}`);
+    } catch (err) {
+      Logger.error('[Deepgram] Failed to save response to file:', err);
+    }
   }
 }
 

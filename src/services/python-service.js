@@ -5,7 +5,7 @@ const { Logger } = require('../config');
 class PythonService {
   constructor() {
     this.pythonBaseUrl = process.env.PYTHON_LAYER_URL || 'http://localhost:8000';
-    this.timeout = parseInt(process.env.PYTHON_SERVICE_TIMEOUT || '3000', 10);
+    this.timeout = parseInt(process.env.PYTHON_SERVICE_TIMEOUT || '60000', 10);
   }
 
   /**
@@ -16,38 +16,35 @@ class PythonService {
    * @param {object} deepgramResponse - Full Deepgram JSON response (text, timeline, metadata, raw)
    * @returns {Promise<object>} - Response from Python layer
    */
-  async sendTextWithDomEvents(text, domEvents = [], metadata = {}, deepgramResponse = null) {
+  async sendTextWithDomEvents(deepgramRaw, domEvents = [], metadata = {}) {
     try {
       const payload = {
-        text: text,
-        domEvents: domEvents,
-        recordingsPath: path.resolve(__dirname, '../../recordings'), // Add recordings path
-        deepgramResponse: deepgramResponse, // Include full Deepgram JSON response
-        metadata: {
-          sessionId: metadata.sessionId,
-          url: metadata.url,
-          viewport: metadata.viewport,
-          startTime: metadata.startTime,
-          endTime: metadata.endTime,
-          timestamp: new Date().toISOString(),
-          ...metadata
+        deepgramRaw: deepgramRaw,
+        domRaw: {
+          events: domEvents,
+          metadata: {
+            sessionId: metadata.sessionId,
+            url: metadata.url,
+            viewport: metadata.viewport,
+            startTime: metadata.startTime,
+            endTime: metadata.endTime,
+            ...metadata
+          }
         }
       };
 
-      Logger.info(`[Python Service] Sending text with ${domEvents.length} DOM events to Python layer`);
+      Logger.info(`[Python Service] Sending data to Python layer at /process-recording`);
       Logger.debug(`[Python Service] Payload:`, {
-        textLength: text.length,
-        eventsCount: domEvents.length,
         sessionId: metadata.sessionId,
-        hasDeepgramResponse: !!deepgramResponse,
-        deepgramTimelineSegments: deepgramResponse?.timeline?.length || 0
+        eventsCount: domEvents.length,
+        hasDeepgramRaw: !!deepgramRaw
       });
 
       // Create AbortController for timeout handling
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
-      const response = await fetch(`${this.pythonBaseUrl}/audio-full-process`, {
+      const response = await fetch(`${this.pythonBaseUrl}/process-recording`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -31,6 +31,21 @@ router.post("/audio-chunk",
   recordingController.uploadAudioChunk
 );
 
+// NEW: Store DOM events incrementally (called multiple times)
+router.post("/dom-events",
+  requestLogger,
+  express.json({ limit: '50mb' }),
+  recordingController.storeDomEvents
+);
+
+// NEW: Finalize recording (triggers Python processing)
+router.post("/finalize",
+  requestLogger,
+  express.json(),
+  recordingController.finalizeRecording
+);
+
+// LEGACY: Keep for backward compatibility (will be deprecated)
 router.post("/process-recording",
   multer({
     dest: "uploads/",

@@ -12,6 +12,12 @@ if (!fs.existsSync(recordingsDir)) fs.mkdirSync(recordingsDir, { recursive: true
 // CHANGED: Per-session file streams
 const activeStreams = new Map(); // sessionId -> { videoFile, audioFile, videoBytesWritten, audioBytesWritten }
 
+// NEW: Per-session DOM events and metadata storage
+const sessionEvents = new Map(); // sessionId -> events array
+const sessionMetadata = new Map(); // sessionId -> metadata object
+const sessionEventsFile = new Map(); // sessionId -> file path for incremental event writing
+const deepgramStatus = new Map(); // sessionId -> { completed: boolean, text: string, deepgramResponse: object }
+
 const getOrCreateStream = (sessionId, type) => {
   if (!activeStreams.has(sessionId)) {
     activeStreams.set(sessionId, {
@@ -222,4 +228,172 @@ exports.processRecording = async ({ events, metadata, videoPath, audioPath }) =>
     Logger.error("[SERVICE] Error processing recording:", err);
     throw err;
   }
+};
+
+/**
+ * Store DOM events incrementally (append to file)
+ * @param {string} sessionId - Session ID
+ * @param {Array} events - Array of new DOM events to append
+ * @param {object} metadata - Session metadata
+ */
+exports.appendDomEvents = (sessionId, events, metadata = {}) => {
+  try {
+    if (!events || !Array.isArray(events) || events.length === 0) {
+      Logger.warn(`[SERVICE] No events to append for session: ${sessionId}`);
+      return false;
+    }
+
+    // Initialize events array if not exists
+    if (!sessionEvents.has(sessionId)) {
+      sessionEvents.set(sessionId, []);
+      sessionMetadata.set(sessionId, metadata);
+
+      // Create events file for incremental writing
+      const eventsFilePath = path.join(recordingsDir, `events_${sessionId}_temp.json`);
+      sessionEventsFile.set(sessionId, eventsFilePath);
+
+      // Write initial structure
+      fs.writeFileSync(eventsFilePath, JSON.stringify({ events: [], metadata }, null, 2));
+
+      Logger.info(`[SERVICE] Created events file for session: ${sessionId}`);
+    }
+
+    // Append events to in-memory array
+    const existingEvents = sessionEvents.get(sessionId);
+    existingEvents.push(...events);
+    sessionEvents.set(sessionId, existingEvents);
+
+    // Update metadata if provided
+    if (metadata && Object.keys(metadata).length > 0) {
+      const existingMetadata = sessionMetadata.get(sessionId) || {};
+      sessionMetadata.set(sessionId, { ...existingMetadata, ...metadata });
+    }
+
+    // Append to file
+    const eventsFilePath = sessionEventsFile.get(sessionId);
+    const currentData = JSON.parse(fs.readFileSync(eventsFilePath, 'utf8'));
+    currentData.events.push(...events);
+    currentData.metadata = sessionMetadata.get(sessionId);
+    fs.writeFileSync(eventsFilePath, JSON.stringify(currentData, null, 2));
+
+    Logger.info(`[SERVICE] Appended ${events.length} events for session: ${sessionId} (Total: ${existingEvents.length})`);
+
+    // Auto-cleanup after 2 hours
+    setTimeout(() => {
+      if (sessionEvents.has(sessionId)) {
+        exports.clearSessionData(sessionId);
+        Logger.warn(`[SERVICE] Auto-cleaned up stale session: ${sessionId}`);
+      }
+    }, 2 * 60 * 60 * 1000);
+
+    return true;
+  } catch (err) {
+    Logger.error(`[SERVICE] Error appending events for session ${sessionId}:`, err);
+    throw err;
+  }
+};
+
+/**
+ * Get stored DOM events for a session
+ * @param {string} sessionId - Session ID
+ * @returns {Array} - DOM events array
+ */
+exports.getEventsForSession = (sessionId) => {
+  return sessionEvents.get(sessionId) || [];
+};
+
+/**
+ * Get stored metadata for a session
+ * @param {string} sessionId - Session ID
+ * @returns {object} - Metadata object
+ */
+exports.getMetadataForSession = (sessionId) => {
+  return sessionMetadata.get(sessionId) || {};
+};
+
+/**
+ * Set Deepgram transcription status
+ * @param {string} sessionId - Session ID
+ * @param {boolean} completed - Whether transcription is complete
+ * @param {string} text - Transcribed text
+ * @param {object} deepgramResponse - Full Deepgram response
+ */
+exports.setDeepgramStatus = (sessionId, completed, text = '', deepgramResponse = null) => {
+  deepgramStatus.set(sessionId, {
+    completed,
+    text,
+    deepgramResponse,
+    timestamp: Date.now()
+  });
+
+  Logger.info(`[SERVICE] Deepgram status for ${sessionId}: ${completed ? 'COMPLETED' : 'IN_PROGRESS'}`);
+  if (completed && text) {
+    Logger.info(`[SERVICE] Deepgram text preview: "${text.substring(0, 100)}..."`);
+  }
+};
+
+/**
+ * Get Deepgram transcription status
+ * @param {string} sessionId - Session ID
+ * @returns {object|null} - Status object or null
+ */
+exports.getDeepgramStatus = (sessionId) => {
+  return deepgramStatus.get(sessionId) || null;
+};
+
+/**
+ * Wait for Deepgram transcription to complete
+ * @param {string} sessionId - Session ID
+ * @param {number} maxWaitMs - Maximum wait time in milliseconds (default: 60000)
+ * @returns {Promise<object>} - Deepgram status object
+ */
+exports.waitForDeepgramCompletion = async (sessionId, maxWaitMs = 60000) => {
+  const startTime = Date.now();
+  const checkInterval = 500; // Check every 500ms
+
+  return new Promise((resolve, reject) => {
+    const checkStatus = () => {
+      const status = deepgramStatus.get(sessionId);
+
+      if (status && status.completed) {
+        Logger.info(`[SERVICE] Deepgram completed for session: ${sessionId}`);
+        resolve(status);
+        return;
+      }
+
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= maxWaitMs) {
+        Logger.error(`[SERVICE] Deepgram timeout for session: ${sessionId} (waited ${elapsed}ms)`);
+        reject(new Error(`Deepgram transcription timeout after ${maxWaitMs}ms`));
+        return;
+      }
+
+      // Check again after interval
+      setTimeout(checkStatus, checkInterval);
+    };
+
+    checkStatus();
+  });
+};
+
+/**
+ * Clear all session data (events, metadata, Deepgram status)
+ * @param {string} sessionId - Session ID
+ */
+exports.clearSessionData = (sessionId) => {
+  sessionEvents.delete(sessionId);
+  sessionMetadata.delete(sessionId);
+  deepgramStatus.delete(sessionId);
+
+  // Delete temporary events file
+  if (sessionEventsFile.has(sessionId)) {
+    const filePath = sessionEventsFile.get(sessionId);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+      Logger.info(`[SERVICE] Deleted temporary events file: ${filePath}`);
+    }
+    sessionEventsFile.delete(sessionId);
+  }
+
+  Logger.info(`[SERVICE] Cleared session data for: ${sessionId}`);
 };
