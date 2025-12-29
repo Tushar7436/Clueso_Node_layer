@@ -279,11 +279,9 @@ exports.sendDemoData = async (req, res) => {
         };
         frontendService.sendAudio(TEST_SESSION.sessionId, audioData);
 
-        // 3. Send Instructions (Events)
+        // 3. Send Instructions logically (as a bulk object)
         Logger.info(`[Frontend Controller] Sending ${events.length} instructions to frontend...`);
-        events.forEach((event, index) => {
-            frontendService.sendInstructions(TEST_SESSION.sessionId, event);
-        });
+        frontendService.sendInstructions(TEST_SESSION.sessionId, { events: events });
 
         Logger.info('[Frontend Controller] Demo data sent successfully');
 

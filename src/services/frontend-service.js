@@ -262,10 +262,8 @@ class FrontendService {
 
         Logger.info(`[Frontend Service] Using DOM events as fallback for session: ${sessionId} (${domEvents.length} events)`);
 
-        // Send each DOM event as an instruction
-        domEvents.forEach((event, index) => {
-            this.sendInstructions(sessionId, event, 'dom');
-        });
+        // Send the entire DOM events array as one consolidated instruction object
+        this.sendInstructions(sessionId, { events: domEvents }, 'dom');
 
         return true;
     }
@@ -331,10 +329,8 @@ class FrontendService {
             this.sendAudio(sessionId, audioData);
             Logger.info('[Frontend Service] Auto-sent audio');
 
-            // 3. Send Instructions (Events)
-            events.forEach((event) => {
-                this.sendInstructions(sessionId, event);
-            });
+            // 3. Send Instructions as a combined object
+            this.sendInstructions(sessionId, { events: events });
             Logger.info(`[Frontend Service] Auto-sent ${events.length} instructions`);
 
         } catch (err) {

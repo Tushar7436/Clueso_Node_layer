@@ -1,4 +1,6 @@
 node_modules/
-.env
 src/config/config.json
 RECORDING_FIX_SUMMARY.md
+.env
+src/recordings/
+deepgram_sessions/

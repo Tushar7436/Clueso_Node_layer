@@ -1,0 +1,70 @@
+### **AI Layer Integration Prompt: S3-Only Data Fetching**
+
+**Objective**: Update the AI/Python service to fetch all recording data (DOM events, metadata, transcription, media) exclusively from Amazon S3 using a provided `sessionId`. **MongoDB is no longer used.**
+
+**Logic**: The Node.js layer sends a trigger POST request to `/process-recording` with:
+```json
+{
+  "sessionId": "session_123_abc",
+  "videoDurationSec": 124.5,
+  "metadata": { 
+    "sessionId": "session_123_abc",
+    "videoDurationSec": 124.5,
+    "url": "https://example.com",
+    "viewport": { "width": 1920, "height": 1080 }
+  }
+}
+```
+
+---
+
+### [Critical] How to fetch `videoDurationSec`
+The AI layer **must** use the precision duration for synchronizing DOM events with narration.
+1.  **From Request Payload**: The trigger POST request contains `videoDurationSec` at the root and inside the `metadata` object. **This is the primary source.**
+2.  **From S3 Metadata File**: If you need to re-fetch it later, parse the JSON body of the metadata file.
+    *   **Path**: `metadata/{sessionId}.json`
+    *   **Field**: `videoDurationSec`
+3.  **From S3 Deepgram JSON**: 
+    *   **Path**: `recordings/{sessionId}/deepgram.json`
+    *   **Field**: `metadata.duration`
+
+---
+
+### **Required Implementations for Data Fetching**
+
+1.  **S3 Data Fetching**:
+    All non-media data is stored as JSON files. You must parse the **Body** of these objects:
+    *   **Metadata**: `metadata/{sessionId}.json` (Contains URL, viewport, and duration)
+    *   **DOM Events**: `events/{sessionId}.json` (An object with an `"events"` key containing the full array of raw user interactions)
+    *   **Transcription**: `recordings/{sessionId}/deepgram.json` (Full Deepgram JSON response)
+
+2.  **S3 Media Fetching**:
+    Raw media files for processing:
+    *   **Raw Video**: `recordings/{sessionId}/video.webm`
+    *   **Raw Audio**: `recordings/{sessionId}/audio.webm`
+
+3.  **Output Storage (Upload to S3)**:
+    After generating the processed audio/narration, upload the result back to S3.
+    *   **Target Path**: `recordings/{sessionId}/processed_audio.mp3`
+    *   *Note*: The Node.js layer will fetch this file via signed URLs when requested by the frontend.
+
+4.  **Response Structure**:
+    Return the final results to Node.js:
+    ```json
+    {
+      "audioFile": "/recordings/{sessionId}/processed_audio.mp3",
+      "instructions": [...], 
+      "displayEffects": [...],
+      "narrations": [...]
+    }
+    ```
+
+**Technical Implementation Note (Python/Boto3)**:
+Always read the stream body and decode to JSON. Do not check S3 headers/metadata for data fields.
+```python
+import json, boto3
+s3 = boto3.resource('s3')
+content = s3.Object('BUCKET_NAME', f'metadata/{sessionId}.json').get()['Body'].read().decode('utf-8')
+metadata = json.loads(content)
+duration = metadata.get('videoDurationSec')
+```

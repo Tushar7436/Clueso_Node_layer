@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const path = require('path');
 const { Logger } = require('../config');
 
 class PythonService {
@@ -9,38 +8,27 @@ class PythonService {
   }
 
   /**
-   * Send text with DOM events to Python layer at /audio-full-process endpoint
-   * @param {string} text - Transcribed text from Deepgram
-   * @param {Array} domEvents - Array of DOM events with timestamps
-   * @param {object} metadata - Additional metadata (sessionId, url, viewport, etc.)
-   * @param {object} deepgramResponse - Full Deepgram JSON response (text, timeline, metadata, raw)
+   * Send only the sessionId (reference ID) to the Python layer.
+   * The Python layer is expected to fetch DOM events and Deepgram data from MongoDB 
+   * and media files from S3 using this ID.
+   * 
+   * @param {string} sessionId - The session ID reference
+   * @param {object} metadata - Basic metadata
    * @returns {Promise<object>} - Response from Python layer
    */
-  async sendTextWithDomEvents(deepgramRaw, domEvents = [], metadata = {}) {
+  async sendSessionReference(sessionId, metadata = {}) {
     try {
       const payload = {
-        deepgramRaw: deepgramRaw,
-        domRaw: {
-          events: domEvents,
-          metadata: {
-            sessionId: metadata.sessionId,
-            url: metadata.url,
-            viewport: metadata.viewport,
-            startTime: metadata.startTime,
-            endTime: metadata.endTime,
-            ...metadata
-          }
+        sessionId: sessionId,
+        videoDurationSec: metadata.videoDurationSec || null, // Root level for easy access
+        metadata: {
+          ...metadata,
+          timestamp: new Date().toISOString()
         }
       };
 
-      Logger.info(`[Python Service] Sending data to Python layer at /process-recording`);
-      Logger.debug(`[Python Service] Payload:`, {
-        sessionId: metadata.sessionId,
-        eventsCount: domEvents.length,
-        hasDeepgramRaw: !!deepgramRaw
-      });
+      Logger.info(`[Python Service] Sending session reference ${sessionId} to Python layer`);
 
-      // Create AbortController for timeout handling
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
@@ -67,85 +55,30 @@ class PythonService {
       return result;
     } catch (error) {
       Logger.error('[Python Service] Error sending data to Python layer:', error);
-
-      // Handle timeout errors
-      if (error.name === 'AbortError' || error.message.includes('timeout')) {
-        throw new Error(`Request to Python layer timed out after ${this.timeout}ms`);
-      }
-
-      // Handle network errors
-      if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
-        throw new Error(`Cannot connect to Python layer at ${this.pythonBaseUrl}. Is the Python server running?`);
-      }
-
       throw error;
     }
   }
 
-  /**
-   * Send raw text with DOM events (alternative endpoint)
-   * @param {object} data - Complete data object with text and events
-   * @returns {Promise<object>} - Response from Python layer
-   */
-  async sendRawTextWithDomEvents(data) {
-    try {
-      Logger.info(`[Python Service] Sending raw text with DOM events to Python layer`);
-
-      // Create AbortController for timeout handling
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), this.timeout);
-
-      const response = await fetch(`${this.pythonBaseUrl}/api/process-raw`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        signal: controller.signal
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        Logger.error(`[Python Service] Error response from Python layer: ${response.status} - ${errorText}`);
-        throw new Error(`Python layer returned error: ${response.status} - ${errorText}`);
-      }
-
-      const result = await response.json();
-      Logger.info('[Python Service] Successfully received response from Python layer');
-
-      return result;
-    } catch (error) {
-      Logger.error('[Python Service] Error sending raw data to Python layer:', error);
-
-      if (error.name === 'AbortError' || error.message.includes('timeout')) {
-        throw new Error(`Request to Python layer timed out after ${this.timeout}ms`);
-      }
-
-      if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
-        throw new Error(`Cannot connect to Python layer at ${this.pythonBaseUrl}. Is the Python server running?`);
-      }
-
-      throw error;
+  // Legacy/Full data method kept for fallback
+  async sendTextWithDomEvents(deepgramRaw, domEvents = [], metadata = {}) {
+    // Extract duration for Python layer which expects it
+    const enrichedMetadata = { ...metadata };
+    if (deepgramRaw?.metadata?.duration) {
+      enrichedMetadata.videoDurationSec = deepgramRaw.metadata.duration;
     }
+
+    // We'll call the new reference method instead to minimize load
+    return this.sendSessionReference(metadata.sessionId, enrichedMetadata);
   }
 
-  /**
-   * Health check for Python layer
-   * @returns {Promise<boolean>} - True if Python layer is reachable
-   */
   async healthCheck() {
     try {
-      // Create AbortController for timeout handling
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
-
       const response = await fetch(`${this.pythonBaseUrl}/health`, {
         method: 'GET',
         signal: controller.signal
       });
-
       clearTimeout(timeoutId);
       return response.ok;
     } catch (error) {
@@ -155,6 +88,4 @@ class PythonService {
   }
 }
 
-// Export singleton instance
 module.exports = new PythonService();
-

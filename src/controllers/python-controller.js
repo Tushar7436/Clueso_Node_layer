@@ -44,32 +44,21 @@ exports.processWithAI = async (text, events = [], metadata = {}, deepgramRespons
         if (sessionId) {
             const frontendService = require("../services/frontend-service");
 
-            // 1. Broadcast instructions (standard actions)
-            if (pythonResponse && pythonResponse.instructions && Array.isArray(pythonResponse.instructions)) {
-                Logger.info(`[Python Controller] Broadcasting ${pythonResponse.instructions.length} instructions to frontend`);
-                pythonResponse.instructions.forEach((instruction) => {
-                    frontendService.sendInstructions(sessionId, instruction, 'python');
-                });
-            } else if (!pythonResponse?.instructions && events && events.length > 0) {
+            // 1-3. Consolidate and Broadcast results as a single bulk message
+            if (pythonResponse) {
+                const consolidatedInstructions = {
+                    instructions: pythonResponse.instructions || [],
+                    displayEffects: (pythonResponse.displayEffects || []).map(effect => ({ type: 'displayEffect', ...effect })),
+                    narrations: pythonResponse.narrations || []
+                };
+
+                Logger.info(`[Python Controller] Broadcasting consolidated results to frontend (${consolidatedInstructions.instructions.length} inst, ${consolidatedInstructions.displayEffects.length} effects, ${consolidatedInstructions.narrations.length} narrations)`);
+
+                frontendService.sendInstructions(sessionId, consolidatedInstructions, 'python');
+            } else if (events && events.length > 0) {
                 // Fallback: Send DOM events as instructions if Python didn't return any
-                Logger.info(`[Python Controller] No instructions from Python, using DOM events as fallback`);
-                events.forEach((event) => {
-                    frontendService.sendInstructions(sessionId, event, 'dom');
-                });
-            }
-
-            // 2. Broadcast displayEffects (new)
-            if (pythonResponse && pythonResponse.displayEffects && Array.isArray(pythonResponse.displayEffects)) {
-                Logger.info(`[Python Controller] Broadcasting ${pythonResponse.displayEffects.length} displayEffects to frontend`);
-                pythonResponse.displayEffects.forEach((effect) => {
-                    frontendService.sendInstructions(sessionId, { type: 'displayEffect', ...effect }, 'python');
-                });
-            }
-
-            // 3. Broadcast narrations (new)
-            if (pythonResponse && pythonResponse.narrations && Array.isArray(pythonResponse.narrations)) {
-                Logger.info(`[Python Controller] Broadcasting narrations to frontend`);
-                frontendService.sendInstructions(sessionId, { type: 'narrations', data: pythonResponse.narrations }, 'python');
+                Logger.info(`[Python Controller] No response from Python, using DOM events as fallback`);
+                frontendService.sendInstructions(sessionId, { events }, 'dom');
             }
 
             // 4. Handle processed audio (audioFile)
